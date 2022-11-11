@@ -15,11 +15,11 @@ public class LawDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String CounterpartyType;
+    private String counterpartyType;
     private String INN;
-    private String FullName;
-    private String LawAddress;
-    private String AddressComments;
+    private String fullName;
+    private String lawAddress;
+    private String addressComments;
     private String KPP;
     private String OGRN;
     private String OKPO;
