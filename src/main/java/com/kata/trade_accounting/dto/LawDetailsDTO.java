@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class LawDetailsDTO {
+
+    private Long id;
     private String counterpartyType;
     private String INN;
     private String fullName;
