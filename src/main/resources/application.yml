@@ -19,3 +19,6 @@ logging:
     org.springframework.web: ERROR
     org.hibernate: ERROR
     com.kata.com.kata.trade_accounting: DEBUG
+  file:
+    path: C:\logs\application-tradeAccounting\
+    name: ${logging.file.path}\logsTradeAccounting.log
