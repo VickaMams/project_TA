@@ -5,13 +5,15 @@ import lombok.Data;
 @Data
 public class CounterAgentDTO {
 
-    enum Status {
+    public enum Status {
         NEW,
         OFFER_SENT,
         NEGOTIATING,
         DEAL_SIGNED,
         DEAL_REJECTED
     }
+
+    private Status status;
 
     private Long id;
     private String name;
