@@ -3,6 +3,7 @@ package com.kata.trade_accounting.configuration;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+<<<<<<< HEAD
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -25,4 +26,13 @@ public class AppConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
+=======
+
+@Configuration
+public class AppConfig {
+    @Bean
+    public ModelMapper getMapper(){
+        return new ModelMapper();
+    }
+>>>>>>> eec74c0 (moved mapper to config)
 }

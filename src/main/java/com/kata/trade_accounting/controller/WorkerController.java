@@ -28,11 +28,11 @@ public class WorkerController {
     @GetMapping("/")
     public ResponseEntity<List<WorkerDto>> getWorkers() {
 
-        List<WorkerDto> workerDtos = workerService.findAll()
+        List<WorkerDto> workerDto = workerService.findAll()
                 .stream().map(worker -> modelMapper.map(worker, WorkerDto.class))
                 .toList();
 
-        return new ResponseEntity<>(workerDtos, HttpStatus.OK);
+        return new ResponseEntity<>(workerDto, HttpStatus.OK);
     }
 
     @PostMapping("/create")
