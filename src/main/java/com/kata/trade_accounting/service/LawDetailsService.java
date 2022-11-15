@@ -1,7 +1,17 @@
 package com.kata.trade_accounting.service;
 
-import org.springframework.stereotype.Service;
+import com.kata.trade_accounting.model.LawDetails;
 
-@Service
-public class LawDetailsService {
+import java.util.List;
+
+public interface LawDetailsService {
+    List<LawDetails> findAll();
+
+    LawDetails getById(Long id);
+
+    LawDetails save(LawDetails lawDetails);
+
+    void deleteById(Long id);
+
+    LawDetails update(LawDetails lawDetails);
 }
