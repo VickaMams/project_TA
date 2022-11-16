@@ -1,8 +1,10 @@
 package com.kata.trade_accounting.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
+@Schema
 public class LawDetailsDTO {
 
     private Long id;
