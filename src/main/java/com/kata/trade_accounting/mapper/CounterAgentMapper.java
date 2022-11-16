@@ -3,12 +3,12 @@ package com.kata.trade_accounting.mapper;
 import com.kata.trade_accounting.dto.CounterAgentDto;
 import com.kata.trade_accounting.model.CounterAgent;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Component
 public class CounterAgentMapper {
     private final ModelMapper mapper;
 
