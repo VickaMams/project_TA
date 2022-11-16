@@ -5,6 +5,8 @@ import com.kata.trade_accounting.mapper.CounterAgentMapper;
 import com.kata.trade_accounting.service.CounterAgentService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,15 +38,17 @@ public class CounterAgentController {
 
     @ApiOperation(value = "getCounterAgentById", notes = "Gets a counter agent by ID", nickname = "getCounterAgent")
     @GetMapping("/getById/{id}")
-    public CounterAgentDto getById(@ApiParam(value = "Id", required = true) @PathVariable Long id) {
-        return mapper.modelToDto(counterAgentService.getById(id));
+    public ResponseEntity<CounterAgentDto> getById(@ApiParam(value = "Id", required = true) @PathVariable Long id) {
+        CounterAgentDto dto = mapper.modelToDto(counterAgentService.getById(id));
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @ApiOperation(value = "getCounterAgentByExample", notes = "Gets a counter agent by Example", nickname = "getCounterAgentExample")
     @GetMapping("/get")
-    public List<CounterAgentDto> getByExample(@RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody(
+    public ResponseEntity<List<CounterAgentDto>> getByExample(@RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody(
             required = true, description = "Example of counter agent used for search") CounterAgentDto dto) {
-        return mapper.allModelsToDto(counterAgentService.getByExample(mapper.dtoToModel(dto)));
+        List<CounterAgentDto> dtoList = mapper.allModelsToDto(counterAgentService.getByExample(mapper.dtoToModel(dto)));
+        return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
     @ApiOperation(value = "updateCounterAgent", notes = "Updates a counter agent", nickname = "updateCounterAgent")
