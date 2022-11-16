@@ -1,9 +1,9 @@
 package com.kata.trade_accounting.controller;
 
-import com.kata.trade_accounting.dto.WareHouseDTO;
-import com.kata.trade_accounting.mapper.WareHouseMapper;
-import com.kata.trade_accounting.model.WareHouse;
-import com.kata.trade_accounting.service.WareHouseService;
+import com.kata.trade_accounting.dto.WarehouseDTO;
+import com.kata.trade_accounting.mapper.WarehouseMapper;
+import com.kata.trade_accounting.model.Warehouse;
+import com.kata.trade_accounting.service.WarehouseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.http.HttpStatus;
@@ -20,50 +20,51 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/lawDetails")
+@RequestMapping("/warehouses")
 public class WareHouseController {
-    private final WareHouseService service;
-    private final WareHouseMapper mapper;
+    private final WarehouseService service;
+    private final WarehouseMapper mapper;
 
-    public WareHouseController(WareHouseService service, WareHouseMapper mapper) {
+    public WareHouseController(WarehouseService service, WarehouseMapper mapper) {
         this.service = service;
         this.mapper = mapper;
     }
 
-    @Operation(summary = "Get all existing WareHouses")
+    @Operation(summary = "Get all existing Warehouses")
     @GetMapping("/")
-    public ResponseEntity<List<WareHouseDTO>> getWareHouses() {
-        List<WareHouseDTO> listDTO = service.findAll()
+    public ResponseEntity<List<WarehouseDTO>> getWareHouses() {
+        List<WarehouseDTO> listDTO = service.findAll()
                 .stream().map(mapper::toDto).toList();
         return new ResponseEntity<>(listDTO, HttpStatus.OK);
     }
 
-    @Operation(summary = "Add new WareHouse")
+    @Operation(summary = "Add new Warehouse")
     @PostMapping("/save")
-    public ResponseEntity<WareHouseDTO> saveWareHouse(@RequestBody WareHouseDTO dto) {
-        WareHouse wareHouse = service.save(mapper.toEntity(dto));
-        return new ResponseEntity<>(mapper.toDto(wareHouse), HttpStatus.OK);
+    public ResponseEntity<WarehouseDTO> saveWarehouse(@RequestBody WarehouseDTO dto) {
+        Warehouse warehouse = service.save(mapper.toEntity(dto));
+        return new ResponseEntity<>(mapper.toDto(warehouse), HttpStatus.OK);
     }
 
-    @Operation(summary = "Delete WareHouse")
+    @Operation(summary = "Delete Warehouse")
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteWareHouse(@PathVariable Long id) {
+    public ResponseEntity<String> deleteWarehouse(@PathVariable Long id) {
         service.deleteById(id);
-        return new ResponseEntity<>("Law Details deleted", HttpStatus.OK);
+        return new ResponseEntity<>("Warehouse deleted", HttpStatus.OK);
     }
 
-    @Operation(summary = "Get WareHouse by id")
+    @Operation(summary = "Get Warehouse by id")
     @GetMapping("/getById/{id}")
-    public ResponseEntity<WareHouseDTO> getWareHouseById(@Parameter(description = "id of Law Details") @PathVariable Long id) {
-        WareHouseDTO dto = mapper.toDto(service.findById(id));
+    public ResponseEntity<WarehouseDTO> getWarehouseById(
+            @Parameter(description = "id of Warehouse") @PathVariable Long id) {
+        WarehouseDTO dto = mapper.toDto(service.findById(id));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @Operation(summary = "Edit WareHouse")
+    @Operation(summary = "Edit Warehouse")
     @PutMapping("/edit/{id}")
-    public ResponseEntity<WareHouseDTO> editWareHouse(@PathVariable Long id, @RequestBody WareHouseDTO dto) {
+    public ResponseEntity<WarehouseDTO> editWarehouse(@PathVariable Long id, @RequestBody WarehouseDTO dto) {
         dto.setId(id);
-        WareHouse wareHouse = service.update(mapper.toEntity(dto));
-        return new ResponseEntity<>(mapper.toDto(wareHouse), HttpStatus.OK);
+        Warehouse warehouse = service.update(mapper.toEntity(dto));
+        return new ResponseEntity<>(mapper.toDto(warehouse), HttpStatus.OK);
     }
 }
