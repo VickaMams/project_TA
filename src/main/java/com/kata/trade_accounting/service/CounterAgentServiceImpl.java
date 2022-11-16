@@ -1,7 +1,6 @@
 package com.kata.trade_accounting.service;
 
-import com.kata.trade_accounting.dto.CounterAgentDto;
-import com.kata.trade_accounting.mapper.CounterAgentMapper;
+import com.kata.trade_accounting.model.CounterAgent;
 import com.kata.trade_accounting.repository.CounterAgentRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -12,36 +11,34 @@ import java.util.List;
 public class CounterAgentServiceImpl implements CounterAgentService {
 
     private final CounterAgentRepository repository;
-    private final CounterAgentMapper mapper;
 
-    public CounterAgentServiceImpl(CounterAgentRepository repository, CounterAgentMapper mapper) {
+    public CounterAgentServiceImpl(CounterAgentRepository repository) {
         this.repository = repository;
-        this.mapper = mapper;
     }
 
     @Override
-    public void add(CounterAgentDto dto) {
-        repository.saveAndFlush(mapper.dtoToModel(dto));
+    public void add(CounterAgent counterAgent) {
+        repository.saveAndFlush(counterAgent);
     }
 
-    public void addAll(List<CounterAgentDto> dtoList) {
-        repository.saveAll(mapper.allDtoToModel(dtoList));
-    }
-
-    @Override
-    public CounterAgentDto getById(Long id) {
-        return mapper.modelToDto(repository.findById(id).orElse(null));
+    public void addAll(List<CounterAgent> counterAgents) {
+        repository.saveAll(counterAgents);
     }
 
     @Override
-    public List<CounterAgentDto> getByExample(CounterAgentDto dto) {
-        return mapper.allModelsToDto(repository.findAll(Example.of(mapper.dtoToModel(dto))));
+    public CounterAgent getById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public void update(CounterAgentDto dto) {
-        if (repository.existsById(dto.getId())) {
-            repository.saveAndFlush(mapper.dtoToModel(dto));
+    public List<CounterAgent> getByExample(CounterAgent counterAgent) {
+        return repository.findAll(Example.of(counterAgent));
+    }
+
+    @Override
+    public void update(CounterAgent counterAgent) {
+        if (repository.existsById(counterAgent.getId())) {
+            repository.saveAndFlush(counterAgent);
         }
     }
 
