@@ -3,7 +3,7 @@ package com.kata.trade_accounting.dto;
 import lombok.Data;
 
 @Data
-public class CounterAgentDTO {
+public class CounterAgentDto {
 
     public enum Status {
         NEW,
