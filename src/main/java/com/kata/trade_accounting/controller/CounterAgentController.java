@@ -43,11 +43,11 @@ public class CounterAgentController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "getCounterAgentByExample", notes = "Gets a counter agent by Example", nickname = "getCounterAgentExample")
+    @ApiOperation(value = "getCounterAgentsByExample", notes = "Gets counter agents by Example", nickname = "getCounterAgentExample")
     @GetMapping("/get")
-    public ResponseEntity<List<CounterAgentDto>> getByExample(@RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody(
+    public ResponseEntity<List<CounterAgentDto>> getAllByExample(@RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody(
             required = true, description = "Example of counter agent used for search") CounterAgentDto dto) {
-        List<CounterAgentDto> dtoList = mapper.allModelsToDto(counterAgentService.getByExample(mapper.dtoToModel(dto)));
+        List<CounterAgentDto> dtoList = mapper.allModelsToDto(counterAgentService.getAllByExample(mapper.dtoToModel(dto)));
         return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 

@@ -31,7 +31,7 @@ public class CounterAgentServiceImpl implements CounterAgentService {
     }
 
     @Override
-    public List<CounterAgent> getByExample(CounterAgent counterAgent) {
+    public List<CounterAgent> getAllByExample(CounterAgent counterAgent) {
         return repository.findAll(Example.of(counterAgent));
     }
 

@@ -10,7 +10,7 @@ public interface CounterAgentService {
 
     CounterAgent getById(Long id);
 
-    List<CounterAgent> getByExample(CounterAgent dto);
+    List<CounterAgent> getAllByExample(CounterAgent dto);
 
     void update(CounterAgent dto);
 
