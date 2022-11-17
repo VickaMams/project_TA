@@ -14,6 +14,4 @@ public interface NdsService {
 
     void updateNdsById(Long id);
 
-    boolean isExistById(Long id);
-
 }

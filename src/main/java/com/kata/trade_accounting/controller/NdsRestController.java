@@ -1,7 +1,6 @@
 package com.kata.trade_accounting.controller;
 
 import com.kata.trade_accounting.dto.NdsDto;
-import com.kata.trade_accounting.exception.NotFoundByIdException;
 import com.kata.trade_accounting.mapper.NdsDtoMapper;
 import com.kata.trade_accounting.mapper.NdsMapper;
 import com.kata.trade_accounting.model.Nds;
@@ -21,11 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Validated
 @RestController
@@ -102,13 +99,7 @@ public class NdsRestController {
             @ApiResponse(code = 403, message = "Недостаточно прав для обновления ставки НДС"),
             @ApiResponse(code = 404, message = "Невозможно найти")
     })
-    public ResponseEntity<Void> putNds(@PathVariable Long id, @RequestParam(value = "ndsValue", required = false) Integer ndsValue) {
-        if (!ndsService.isExistById(id)) {
-            throw new NotFoundByIdException("Нет ставки с  ID: " + id + ", проверьте своё значение");
-        }
-        if (ndsValue == null) {
-            throw new NullPointerException("Введите значение НДС");
-        }
+    public ResponseEntity<Void> putNds(@PathVariable Long id) {
         ndsService.updateNdsById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

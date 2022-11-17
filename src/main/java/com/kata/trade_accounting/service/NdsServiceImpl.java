@@ -1,5 +1,6 @@
 package com.kata.trade_accounting.service;
 
+import com.kata.trade_accounting.exception.NotFoundByIdException;
 import com.kata.trade_accounting.repository.NdsDao;
 import com.kata.trade_accounting.model.Nds;
 import org.springframework.stereotype.Service;
@@ -33,13 +34,11 @@ public class NdsServiceImpl implements NdsService {
 
     @Override
     public void updateNdsById(Long id) {
-
+        Nds nds = ndsDao.findById(id).orElse(null);
+        if (nds != null) {
+            ndsDao.save(nds);
+        } else {
+            throw new NotFoundByIdException("Ставка НДС не найдена");
+        }
     }
-
-    @Override
-    public boolean isExistById(Long id) {
-        return true;
-    }
-
-    ;
 }
