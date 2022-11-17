@@ -1,17 +1,17 @@
 package com.kata.trade_accounting.service;
 
-import com.kata.trade_accounting.model.LawDetails;
+import com.kata.trade_accounting.dto.LawDetailsDTO;
 
 import java.util.List;
 
 public interface LawDetailsService {
-    List<LawDetails> findAll();
+    List<LawDetailsDTO> findAll();
 
-    LawDetails getById(Long id);
+    LawDetailsDTO getById(Long id);
 
-    LawDetails save(LawDetails lawDetails);
+    LawDetailsDTO save(LawDetailsDTO dto);
 
     void deleteById(Long id);
 
-    LawDetails update(LawDetails lawDetails);
+    LawDetailsDTO edit(Long id, LawDetailsDTO dto);
 }

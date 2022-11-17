@@ -2,7 +2,6 @@ package com.kata.trade_accounting.controller;
 
 import com.kata.trade_accounting.dto.LawDetailsDTO;
 import com.kata.trade_accounting.mapper.LawDetailsMapper;
-import com.kata.trade_accounting.model.LawDetails;
 import com.kata.trade_accounting.service.LawDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -10,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,18 +25,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/lawDetails")
+@Tag(name = "Operation with Law Details", description = "Basic crud operation with Law Details")
 public class LawDetailsController {
 
     private final LawDetailsService service;
 
-    private final LawDetailsMapper mapper;
-
     public LawDetailsController(LawDetailsService service, LawDetailsMapper mapper) {
         this.service = service;
-        this.mapper = mapper;
     }
 
     @Operation(summary = "Get all existing Law Details")
+    @Tag(name = "Operation with Law Details")
     @ApiResponses(
             value = {
                     @ApiResponse(
@@ -52,12 +51,11 @@ public class LawDetailsController {
             })
     @GetMapping("/")
     public ResponseEntity<List<LawDetailsDTO>> getAllLawDetails() {
-        List<LawDetailsDTO> dtos = service.findAll()
-                .stream().map(mapper::toDto).toList();
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @Operation(summary = "Create new Law Details")
+    @Tag(name = "Operation with Law Details")
     @ApiResponses(
             value = {
                     @ApiResponse(
@@ -73,11 +71,11 @@ public class LawDetailsController {
             })
     @PostMapping("/save")
     public ResponseEntity<LawDetailsDTO> saveLawDetails(@Parameter(description = "New Law Details") @RequestBody LawDetailsDTO dto) {
-        LawDetails lawDetails = service.save(mapper.toEntity(dto));
-        return new ResponseEntity<>(mapper.toDto(lawDetails), HttpStatus.OK);
+        return new ResponseEntity<>(service.save(dto), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete Law Details")
+    @Tag(name = "Operation with Law Details")
     @ApiResponses(
             value = {
                     @ApiResponse(
@@ -98,6 +96,7 @@ public class LawDetailsController {
     }
 
     @Operation(summary = "Get Law Details by it id")
+    @Tag(name = "Operation with Law Details")
     @ApiResponses(
             value = {
                     @ApiResponse(
@@ -113,11 +112,11 @@ public class LawDetailsController {
             })
     @GetMapping("/getById/{id}")
     public ResponseEntity<LawDetailsDTO> getById(@Parameter(description = "Law Details id") @PathVariable Long id) {
-        LawDetailsDTO dto = mapper.toDto(service.getById(id));
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
     @Operation(summary = "Edit specific Law Details")
+    @Tag(name = "Operation with Law Details")
     @ApiResponses(
             value = {
                     @ApiResponse(
@@ -132,10 +131,8 @@ public class LawDetailsController {
                     @ApiResponse(responseCode = "404", description = "Law Details not found", content = @Content)
             })
     @PutMapping("/edit/{id}")
-    public ResponseEntity<LawDetailsDTO> editLawDetails(@Parameter(description = "Law Details id") @PathVariable Long id, @Parameter(description = "Information which must be updated") @RequestBody LawDetailsDTO dto) {
-        dto.setId(id);
-        LawDetails lawDetails = service.update(mapper.toEntity(dto));
-        return new ResponseEntity<>(mapper.toDto(lawDetails), HttpStatus.OK);
+    public ResponseEntity<LawDetailsDTO> editLawDetails(@Parameter(description = "Law Details id") @PathVariable Long id, @Parameter(description = "Information which must be edited") @RequestBody LawDetailsDTO dto) {
+        return new ResponseEntity<>(service.edit(id, dto), HttpStatus.OK);
     }
 
 }

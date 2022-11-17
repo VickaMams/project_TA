@@ -1,11 +1,12 @@
 package com.kata.trade_accounting.service;
 
+import com.kata.trade_accounting.dto.LawDetailsDTO;
+import com.kata.trade_accounting.exception.LawDetailsNotFoundException;
+import com.kata.trade_accounting.mapper.LawDetailsMapper;
 import com.kata.trade_accounting.model.LawDetails;
 import com.kata.trade_accounting.repository.LawDetailsRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,40 +16,56 @@ public class LawDetailsServiceImpl implements LawDetailsService {
 
     private final LawDetailsRepository repository;
 
-    public LawDetailsServiceImpl(LawDetailsRepository repository) {
+    private final LawDetailsMapper mapper;
+
+    public LawDetailsServiceImpl(LawDetailsRepository repository, LawDetailsMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
-    public List<LawDetails> findAll() {
-        return repository.findAll();
+    public List<LawDetailsDTO> findAll() {
+        return repository.findAll()
+                .stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public LawDetails getById(Long id) {
+    public LawDetailsDTO getById(Long id) {
         Optional<LawDetails> lawDetails = repository.findById(id);
         if (lawDetails.isPresent()) {
-            return lawDetails.get();
+            return mapper.toDto(lawDetails.get());
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new LawDetailsNotFoundException(String.format("Law Details with id=%s not found", id));
         }
     }
 
     @Override
     @Transactional
-    public LawDetails save(LawDetails lawDetails) {
-        return repository.save(lawDetails);
+    public LawDetailsDTO save(LawDetailsDTO dto) {
+        LawDetails entity = repository.save(mapper.toEntity(dto));
+        return mapper.toDto(entity);
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
-        repository.deleteById(id);
+        Optional<LawDetails> lawDetails = repository.findById(id);
+        if (lawDetails.isPresent()) {
+            repository.deleteById(id);
+        } else {
+            throw new LawDetailsNotFoundException(String.format("Law Details with id=%s not found", id));
+        }
     }
 
     @Override
     @Transactional
-    public LawDetails update(LawDetails lawDetails) {
-        return repository.save(lawDetails);
+    public LawDetailsDTO edit(Long id, LawDetailsDTO dto) {
+        Optional<LawDetails> lawDetails = repository.findById(id);
+        if (lawDetails.isPresent()) {
+            dto.setId(id);
+            return save(dto);
+        } else {
+            throw new LawDetailsNotFoundException(String.format("Law Details with id=%s not found", id));
+        }
     }
 }
