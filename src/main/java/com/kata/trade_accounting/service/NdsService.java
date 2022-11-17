@@ -4,6 +4,7 @@ package com.kata.trade_accounting.service;
 import com.kata.trade_accounting.model.Nds;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface NdsService {
     List<Nds> findAll();
@@ -12,6 +13,8 @@ public interface NdsService {
 
     void deleteNdsById(Long id);
 
-    void updateNdsById(Long id);
+    void updateNds(Nds nds);
+
+    Nds findById(Long id);
 
 }

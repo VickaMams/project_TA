@@ -32,7 +32,6 @@ public class NdsRestController {
 
     private final NdsService ndsService;
     private final NdsDtoMapper ndsDtoMapper;
-
     private final NdsMapper ndsMapper;
 
     public NdsRestController(NdsService ndsService, NdsDtoMapper ndsDtoMapper, NdsMapper ndsMapper) {
@@ -99,9 +98,10 @@ public class NdsRestController {
             @ApiResponse(code = 403, message = "Недостаточно прав для обновления ставки НДС"),
             @ApiResponse(code = 404, message = "Невозможно найти")
     })
-    public ResponseEntity<Void> putNds(@PathVariable Long id) {
-        ndsService.updateNdsById(id);
+    public ResponseEntity<Void> putNds(@RequestBody NdsDto ndsDto) {
+        Nds nds = ndsMapper.toNds(ndsDto);
+        ndsService.updateNds(nds);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
+      }
 
 }
