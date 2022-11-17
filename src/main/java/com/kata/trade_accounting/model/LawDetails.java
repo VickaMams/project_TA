@@ -23,4 +23,5 @@ public class LawDetails {
     private String KPP;
     private String OGRN;
     private String OKPO;
+    private boolean removed;
 }

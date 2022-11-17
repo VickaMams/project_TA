@@ -5,6 +5,8 @@ import com.kata.trade_accounting.mapper.LawDetailsMapper;
 import com.kata.trade_accounting.service.LawDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -44,7 +46,7 @@ public class LawDetailsController {
                             content = {
                                     @Content(
                                             mediaType = "application/json",
-                                            schema = @Schema(implementation = LawDetailsDTO.class))
+                                            array = @ArraySchema(schema = @Schema(implementation = LawDetailsDTO.class)))
                             }),
                     @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
                     @ApiResponse(responseCode = "404", description = "Law Details not found", content = @Content)
@@ -69,8 +71,11 @@ public class LawDetailsController {
                     @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
                     @ApiResponse(responseCode = "404", description = "Law Details not created", content = @Content)
             })
-    @PostMapping("/save")
-    public ResponseEntity<LawDetailsDTO> saveLawDetails(@Parameter(description = "New Law Details") @RequestBody LawDetailsDTO dto) {
+    @PostMapping(value = "/save", consumes = "application/json")
+    public ResponseEntity<LawDetailsDTO> saveLawDetails(
+            @Parameter(name = "Law Details",
+                    description = "New Law Details")
+            @RequestBody LawDetailsDTO dto) {
         return new ResponseEntity<>(service.save(dto), HttpStatus.OK);
     }
 
@@ -90,7 +95,11 @@ public class LawDetailsController {
                     @ApiResponse(responseCode = "404", description = "Law Details not found", content = @Content)
             })
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteLawDetails(@Parameter(description = "Law Details id") @PathVariable Long id) {
+    public ResponseEntity<String> deleteLawDetails(
+            @Parameter(in = ParameterIn.PATH, name = "Law details id",
+                    required = true, description = "The identifier of Law Details",
+                    allowReserved = true)
+            @PathVariable Long id) {
         service.deleteById(id);
         return new ResponseEntity<>("Law Details deleted", HttpStatus.OK);
     }
@@ -111,7 +120,11 @@ public class LawDetailsController {
                     @ApiResponse(responseCode = "404", description = "Law Details not found", content = @Content)
             })
     @GetMapping("/getById/{id}")
-    public ResponseEntity<LawDetailsDTO> getById(@Parameter(description = "Law Details id") @PathVariable Long id) {
+    public ResponseEntity<LawDetailsDTO> getById(
+            @Parameter(in = ParameterIn.PATH, name = "Law details id",
+                    required = true, description = "The identifier of Law Details",
+                    allowReserved = true)
+            @PathVariable Long id) {
         return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
@@ -131,7 +144,12 @@ public class LawDetailsController {
                     @ApiResponse(responseCode = "404", description = "Law Details not found", content = @Content)
             })
     @PutMapping("/edit/{id}")
-    public ResponseEntity<LawDetailsDTO> editLawDetails(@Parameter(description = "Law Details id") @PathVariable Long id, @Parameter(description = "Information which must be edited") @RequestBody LawDetailsDTO dto) {
+    public ResponseEntity<LawDetailsDTO> editLawDetails(
+            @Parameter(in = ParameterIn.PATH, name = "Law details id",
+                    required = true, description = "The identifier of Law Details",
+                    allowReserved = true) @PathVariable Long id,
+            @Parameter(name = "Changes in Law Details", description = "Information which must be edited")
+            @RequestBody LawDetailsDTO dto) {
         return new ResponseEntity<>(service.edit(id, dto), HttpStatus.OK);
     }
 

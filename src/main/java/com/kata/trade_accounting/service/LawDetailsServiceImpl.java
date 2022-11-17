@@ -51,7 +51,7 @@ public class LawDetailsServiceImpl implements LawDetailsService {
     public void deleteById(Long id) {
         Optional<LawDetails> lawDetails = repository.findById(id);
         if (lawDetails.isPresent()) {
-            repository.deleteById(id);
+            lawDetails.get().setRemoved(true);
         } else {
             throw new LawDetailsNotFoundException(String.format("Law Details with id=%s not found", id));
         }
