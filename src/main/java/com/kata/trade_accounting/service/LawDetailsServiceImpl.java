@@ -8,16 +8,11 @@ import com.kata.trade_accounting.repository.LawDetailsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class LawDetailsServiceImpl implements LawDetailsService {
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     private final LawDetailsRepository repository;
 
@@ -55,10 +50,8 @@ public class LawDetailsServiceImpl implements LawDetailsService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-        int i = entityManager.createQuery("update LawDetails set removed = true where id = ?1")
-                .setParameter(1, id)
-                .executeUpdate();
-        if (i==0){
+        int i = repository.setRemovedTrue(id);
+        if (i == 0) {
             throw new LawDetailsNotFoundException(String.format("Law Details with id=%s not found", id));
         }
     }
