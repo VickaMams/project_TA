@@ -1,18 +1,18 @@
 package com.kata.trade_accounting.service;
 
-import com.kata.trade_accounting.model.CounterAgent;
+import com.kata.trade_accounting.dto.CounterAgentDto;
 
 import java.util.List;
 
 public interface CounterAgentService {
 
-    void add(CounterAgent counterAgent);
+    void add(CounterAgentDto counterAgent);
 
-    CounterAgent getById(Long id);
+    CounterAgentDto getById(Long id);
 
-    List<CounterAgent> getAllByExample(CounterAgent dto);
+    List<CounterAgentDto> getAllByExample(CounterAgentDto dto);
 
-    void update(CounterAgent dto);
+    void update(CounterAgentDto dto);
 
     void removeById(Long id);
 }

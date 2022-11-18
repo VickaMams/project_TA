@@ -10,6 +10,7 @@ import javax.persistence.Id;
 @Data
 @Entity
 public class CounterAgent {
+    private boolean removed;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

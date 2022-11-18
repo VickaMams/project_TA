@@ -1,7 +1,6 @@
 package com.kata.trade_accounting.controller;
 
 import com.kata.trade_accounting.dto.CounterAgentDto;
-import com.kata.trade_accounting.mapper.CounterAgentMapper;
 import com.kata.trade_accounting.service.CounterAgentService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -22,45 +21,53 @@ import java.util.List;
 public class CounterAgentController {
 
     private final CounterAgentService counterAgentService;
-    private final CounterAgentMapper mapper;
 
-    public CounterAgentController(CounterAgentService counterAgentService, CounterAgentMapper mapper) {
+    public CounterAgentController(CounterAgentService counterAgentService) {
         this.counterAgentService = counterAgentService;
-        this.mapper = mapper;
     }
 
     @ApiOperation(value = "addCounterAgent", notes = "Adds a counter agent", nickname = "addCounterAgent")
     @PostMapping("/add")
-    public void add(@RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            required = true, description = "A counter agent to be added") CounterAgentDto counterAgent) {
-        counterAgentService.add(mapper.dtoToModel(counterAgent));
+    public void add(@RequestBody
+                    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                            required = true, description = "A counter agent to be added")
+                    CounterAgentDto counterAgent) {
+        counterAgentService.add(counterAgent);
     }
 
     @ApiOperation(value = "getCounterAgentById", notes = "Gets a counter agent by ID", nickname = "getCounterAgent")
     @GetMapping("/getById/{id}")
-    public ResponseEntity<CounterAgentDto> getById(@ApiParam(value = "Id", required = true) @PathVariable Long id) {
-        CounterAgentDto dto = mapper.modelToDto(counterAgentService.getById(id));
+    public ResponseEntity<CounterAgentDto> getById(@ApiParam(value = "Id", required = true)
+                                                   @PathVariable
+                                                   Long id) {
+        CounterAgentDto dto = counterAgentService.getById(id);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @ApiOperation(value = "getCounterAgentsByExample", notes = "Gets counter agents by Example", nickname = "getCounterAgentExample")
     @GetMapping("/get")
-    public ResponseEntity<List<CounterAgentDto>> getAllByExample(@RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            required = true, description = "Example of counter agent used for search") CounterAgentDto dto) {
-        List<CounterAgentDto> dtoList = mapper.allModelsToDto(counterAgentService.getAllByExample(mapper.dtoToModel(dto)));
+    public ResponseEntity<List<CounterAgentDto>> getAllByExample(@RequestBody
+                                                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                                         required = true, description = "Example of counter agent used for search")
+                                                                 CounterAgentDto dto) {
+        List<CounterAgentDto> dtoList = counterAgentService.getAllByExample(dto);
         return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
     @ApiOperation(value = "updateCounterAgent", notes = "Updates a counter agent", nickname = "updateCounterAgent")
     @PostMapping("/update")
-    public void update(@RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description =
-            "A counter agent that needs to be updated") CounterAgentDto dto) {
-        counterAgentService.update(mapper.dtoToModel(dto));
+    public void update(@RequestBody
+                       @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description =
+                               "A counter agent that needs to be updated")
+                       CounterAgentDto dto) {
+        counterAgentService.update(dto);
     }
 
     @ApiOperation(value = "removeCounterAgentById", notes = "Removes counter agent by ID", nickname = "removeCounterAgent")
     @DeleteMapping("/remove/{id}")
-    public void removeById(@ApiParam(value = "Id", required = true) @PathVariable Long id) {
+    public void removeById(@ApiParam(value = "Id", required = true)
+                           @PathVariable
+                           Long id) {
         counterAgentService.removeById(id);
     }
 
