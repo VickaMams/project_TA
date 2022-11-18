@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Warehouses")
 @Data
 public class Warehouse {
     @Id
@@ -17,7 +19,8 @@ public class Warehouse {
     private String name;
     private String code;
     private String address;
-    private String sharedAccess;
-    private String ownerDepartment;
-    private String ownerEmployee;
+    private String commentForAddress;
+    private String comment;
+
+    private boolean remove;
 }
