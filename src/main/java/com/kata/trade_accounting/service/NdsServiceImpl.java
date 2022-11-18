@@ -1,19 +1,24 @@
 package com.kata.trade_accounting.service;
 
+import com.kata.trade_accounting.dto.NdsDto;
+import com.kata.trade_accounting.exception.NotFoundByIdException;
+import com.kata.trade_accounting.mapper.NdsMapper;
 import com.kata.trade_accounting.repository.NdsDao;
 import com.kata.trade_accounting.model.Nds;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class NdsServiceImpl implements NdsService {
     private final NdsDao ndsDao;
+    private final NdsMapper ndsMapper;
 
-    public NdsServiceImpl(NdsDao ndsDao) {
+    public NdsServiceImpl(NdsDao ndsDao, NdsMapper ndsMapper) {
         this.ndsDao = ndsDao;
+        this.ndsMapper = ndsMapper;
     }
 
 
@@ -23,19 +28,19 @@ public class NdsServiceImpl implements NdsService {
     }
 
     @Override
-    public void createNds(Nds nds) {
+    public void saveNds(NdsDto ndsDto) {
+        Nds nds = ndsMapper.toNds(ndsDto);
         ndsDao.save(nds);
     }
 
     @Override
     public void deleteNdsById(Long id) {
-        ndsDao.deleteById(id);
-    }
-
-    @Override
-    public void updateNds(Nds nds) {
-        ndsDao.save(nds);
-
+        Nds nds = findById(id);
+        if (nds != null) {
+            nds.setRemoved(true);
+        } else {
+            throw new NotFoundByIdException("Ставка не найдена");
+        }
     }
 
     @Override

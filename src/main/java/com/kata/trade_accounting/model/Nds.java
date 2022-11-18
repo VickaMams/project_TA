@@ -21,4 +21,6 @@ public class Nds {
     private Integer ndsValue;
 
     private String comment;
+
+    private boolean removed;
 }

@@ -2,8 +2,6 @@ package com.kata.trade_accounting.controller;
 
 import com.kata.trade_accounting.dto.NdsDto;
 import com.kata.trade_accounting.mapper.NdsDtoMapper;
-import com.kata.trade_accounting.mapper.NdsMapper;
-import com.kata.trade_accounting.model.Nds;
 import com.kata.trade_accounting.service.NdsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 
@@ -32,14 +31,12 @@ public class NdsRestController {
 
     private final NdsService ndsService;
     private final NdsDtoMapper ndsDtoMapper;
-    private final NdsMapper ndsMapper;
 
-    public NdsRestController(NdsService ndsService, NdsDtoMapper ndsDtoMapper, NdsMapper ndsMapper) {
+    public NdsRestController(NdsService ndsService, NdsDtoMapper ndsDtoMapper) {
         this.ndsService = ndsService;
         this.ndsDtoMapper = ndsDtoMapper;
-        this.ndsMapper = ndsMapper;
-    }
 
+    }
 
     @GetMapping()
     @ApiOperation(value = "Получение списка значений НДС", response = NdsDto.class, responseContainer = "list")
@@ -50,11 +47,9 @@ public class NdsRestController {
             @ApiResponse(code = 404, message = "Невозможно найти.")
     })
     public ResponseEntity<List<NdsDto>> getNds() {
-
         List<NdsDto> ndsDto = ndsService.findAll()
                 .stream().map(ndsDtoMapper::toNdsDto)
                 .toList();
-
         return new ResponseEntity<>(ndsDto, HttpStatus.OK);
 
     }
@@ -69,8 +64,7 @@ public class NdsRestController {
             @ApiResponse(code = 404, message = "Невозможно найти")
     })
     public ResponseEntity<Void> createNds(@RequestBody NdsDto ndsDto) {
-        Nds nds = ndsMapper.toNds(ndsDto);
-        ndsService.createNds(nds);
+        ndsService.saveNds(ndsDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -99,9 +93,7 @@ public class NdsRestController {
             @ApiResponse(code = 404, message = "Невозможно найти")
     })
     public ResponseEntity<Void> putNds(@RequestBody NdsDto ndsDto) {
-        Nds nds = ndsMapper.toNds(ndsDto);
-        ndsService.updateNds(nds);
+        ndsService.saveNds(ndsDto);
         return new ResponseEntity<>(HttpStatus.OK);
-      }
-
+    }
 }
