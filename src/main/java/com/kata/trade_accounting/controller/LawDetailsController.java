@@ -96,7 +96,7 @@ public class LawDetailsController {
             })
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteLawDetails(
-            @Parameter(in = ParameterIn.PATH, name = "Law details id",
+            @Parameter(in = ParameterIn.PATH, name = "id",
                     required = true, description = "The identifier of Law Details",
                     allowReserved = true)
             @PathVariable Long id) {
@@ -121,7 +121,7 @@ public class LawDetailsController {
             })
     @GetMapping("/getById/{id}")
     public ResponseEntity<LawDetailsDTO> getById(
-            @Parameter(in = ParameterIn.PATH, name = "Law details id",
+            @Parameter(in = ParameterIn.PATH, name = "id",
                     required = true, description = "The identifier of Law Details",
                     allowReserved = true)
             @PathVariable Long id) {
@@ -145,9 +145,10 @@ public class LawDetailsController {
             })
     @PutMapping("/edit/{id}")
     public ResponseEntity<LawDetailsDTO> editLawDetails(
-            @Parameter(in = ParameterIn.PATH, name = "Law details id",
+            @Parameter(in = ParameterIn.PATH, name = "id",
                     required = true, description = "The identifier of Law Details",
-                    allowReserved = true) @PathVariable Long id,
+                    allowReserved = true)
+            @PathVariable Long id,
             @Parameter(name = "Changes in Law Details", description = "Information which must be edited")
             @RequestBody LawDetailsDTO dto) {
         return new ResponseEntity<>(service.edit(id, dto), HttpStatus.OK);
