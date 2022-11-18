@@ -32,6 +32,7 @@ public class WarehouseController {
     private final WarehouseDTOService service;
 
     @Operation(summary = "Get all existing warehouses")
+    @Tag(name = "Warehouse-Controller")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Get information about all existing warehouses",
@@ -48,6 +49,7 @@ public class WarehouseController {
     }
 
     @Operation(summary = "Get warehouse by id")
+    @Tag(name = "Warehouse-Controller")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Warehouse information",
@@ -65,6 +67,7 @@ public class WarehouseController {
     }
 
     @Operation(summary = "Add new warehouse")
+    @Tag(name = "Warehouse-Controller")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "the warehouse has been created",
@@ -82,6 +85,7 @@ public class WarehouseController {
     }
 
     @Operation(summary = "Delete warehouse")
+    @Tag(name = "Warehouse-Controller")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Warehouse deleted"),
@@ -97,6 +101,7 @@ public class WarehouseController {
 
 
     @Operation(summary = "Edit warehouse")
+    @Tag(name = "Warehouse-Controller")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "The warehouse changed",
