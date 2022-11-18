@@ -22,5 +22,5 @@ public class Warehouse {
     private String commentForAddress;
     private String comment;
 
-    private boolean remove;
+    private boolean removed;
 }
