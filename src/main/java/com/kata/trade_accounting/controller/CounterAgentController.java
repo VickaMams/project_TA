@@ -2,8 +2,11 @@ package com.kata.trade_accounting.controller;
 
 import com.kata.trade_accounting.dto.CounterAgentDto;
 import com.kata.trade_accounting.service.CounterAgentService;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,8 +29,9 @@ public class CounterAgentController {
         this.counterAgentService = counterAgentService;
     }
 
-    @ApiOperation(value = "addCounterAgent", notes = "Adds a counter agent", nickname = "addCounterAgent")
     @PostMapping("/add")
+    @ApiResponses( value = @ApiResponse(responseCode = "200", description = "Addded counteragent"))
+    @Operation(summary = "Add a counteragent")
     public void add(@RequestBody
                     @io.swagger.v3.oas.annotations.parameters.RequestBody(
                             required = true, description = "A counter agent to be added")
@@ -35,8 +39,13 @@ public class CounterAgentController {
         counterAgentService.add(counterAgent);
     }
 
-    @ApiOperation(value = "getCounterAgentById", notes = "Gets a counter agent by ID", nickname = "getCounterAgent")
+
     @GetMapping("/getById/{id}")
+    @Operation(summary = "Get a counteragent by Id")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200", description = "Counteragent information", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Counteragent not found")
+    } )
     public ResponseEntity<CounterAgentDto> getById(@ApiParam(value = "Id", required = true)
                                                    @PathVariable
                                                    Long id) {
@@ -44,8 +53,12 @@ public class CounterAgentController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "getCounterAgentsByExample", notes = "Gets counter agents by Example", nickname = "getCounterAgentExample")
+
     @GetMapping("/get")
+    @Operation(description = "Return a list of counteragents")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200", description = "List of counteragents", content = @Content)
+    } )
     public ResponseEntity<List<CounterAgentDto>> getAllByExample(@RequestBody
                                                                  @io.swagger.v3.oas.annotations.parameters.RequestBody(
                                                                          required = true, description = "Example of counter agent used for search")
@@ -54,8 +67,13 @@ public class CounterAgentController {
         return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "updateCounterAgent", notes = "Updates a counter agent", nickname = "updateCounterAgent")
+
     @PostMapping("/update")
+    @Operation(description = "Update a given counteragent")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200", description = "Counteragent updated"),
+            @ApiResponse(responseCode = "404", description = "Could not update: no such counteragent")
+    } )
     public void update(@RequestBody
                        @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description =
                                "A counter agent that needs to be updated")
@@ -63,8 +81,13 @@ public class CounterAgentController {
         counterAgentService.update(dto);
     }
 
-    @ApiOperation(value = "removeCounterAgentById", notes = "Removes counter agent by ID", nickname = "removeCounterAgent")
+
     @DeleteMapping("/remove/{id}")
+    @Operation(description = "Flag counteragent record for deletion")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200", description = "Counteragent removed"),
+            @ApiResponse(responseCode = "404", description = "Could not remove: no such counteragent")
+    } )
     public void removeById(@ApiParam(value = "Id", required = true)
                            @PathVariable
                            Long id) {
