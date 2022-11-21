@@ -2,6 +2,7 @@ package com.kata.trade_accounting.service;
 
 import com.kata.trade_accounting.dto.WarehouseDTO;
 import com.kata.trade_accounting.exception.IdNotFoundException;
+import com.kata.trade_accounting.exception.LawDetailsNotFoundException;
 import com.kata.trade_accounting.exception.ModelDeletedException;
 import com.kata.trade_accounting.mapper.WarehouseMapper;
 import com.kata.trade_accounting.model.Warehouse;
@@ -40,7 +41,7 @@ public class WarehouseDTOServiceImpl implements WarehouseDTOService {
     public WarehouseDTO save(WarehouseDTO warehouseDTO) {
         Warehouse warehouse = warehouseRepository.findById(warehouseDTO.getId()).orElse(null);
         if (warehouse != null) {
-            if (warehouse.isRemoved()){
+            if (warehouse.isRemoved()) {
                 throw new ModelDeletedException("the model with this ID" + warehouseDTO.getId() + " has been deleted");
             } else {
                 throw new IdNotFoundException("this ID" + warehouseDTO.getId() + " is already in use ");
@@ -53,13 +54,10 @@ public class WarehouseDTOServiceImpl implements WarehouseDTOService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-        Warehouse warehouse = warehouseRepository.findById(id)
-                .orElseThrow(() -> new IdNotFoundException("No such warehouse with ID " + id));
-        if (warehouse.isRemoved()) {
-            throw new IdNotFoundException("Warehouse was deleted" + id);
+        int i = warehouseRepository.setRemovedTrue(id);
+        if (i == 0) {
+            throw new LawDetailsNotFoundException(String.format("Law Details with id=%s not found", id));
         }
-        warehouse.setRemoved(true);
-        warehouseRepository.save(warehouse);
     }
 
     @Override
