@@ -56,7 +56,7 @@ public class WarehouseDTOServiceImpl implements WarehouseDTOService {
     public void deleteById(Long id) {
         int i = warehouseRepository.setRemovedTrue(id);
         if (i == 0) {
-            throw new LawDetailsNotFoundException(String.format("Law Details with id=%s not found", id));
+            throw new LawDetailsNotFoundException(String.format("Warehouse with id=%s not found", id));
         }
     }
 
