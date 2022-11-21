@@ -1,19 +1,13 @@
 package com.kata.trade_accounting.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
+@Schema
 public class CounterAgentDto {
 
-    public enum Status {
-        NEW,
-        OFFER_SENT,
-        NEGOTIATING,
-        DEAL_SIGNED,
-        DEAL_REJECTED
-    }
-
-    private Status status;
+    private CounterAgentStatus status;
 
     private Long id;
     private String name;

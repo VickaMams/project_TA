@@ -2,8 +2,10 @@ package com.kata.trade_accounting.controller;
 
 import com.kata.trade_accounting.dto.CounterAgentDto;
 import com.kata.trade_accounting.service.CounterAgentService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -21,6 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/counterAgent")
+@Api(value = "CounterAgentController", description = "Operations related to counter agents")
 public class CounterAgentController {
 
     private final CounterAgentService counterAgentService;
@@ -88,7 +91,7 @@ public class CounterAgentController {
             @ApiResponse(responseCode = "200", description = "Counteragent removed"),
             @ApiResponse(responseCode = "404", description = "Could not remove: no such counteragent")
     } )
-    public void removeById(@ApiParam(value = "Id", required = true)
+    public void removeById(@Parameter(name = "Id", required = true)
                            @PathVariable
                            Long id) {
         counterAgentService.removeById(id);
