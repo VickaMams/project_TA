@@ -4,13 +4,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(name="UnitsOfMeasurementDTO", description="DTO model of UnitsOfMeasurement")
+@Schema(name = "UnitsOfMeasurementDTO", description = "DTO model of UnitsOfMeasurement")
 public class UnitsOfMeasurementDTO {
     @Schema(description = "UnitsOfMeasurement ID", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
-    @Schema(description = "UnitsOfMeasurement name")
+    @Schema(description = "UnitsOfMeasurement short name")
     private String shortName;
-    @Schema(description = "UnitsOfMeasurement name")
+    @Schema(description = "UnitsOfMeasurement full name")
     private String fullName;
     @Schema(description = "UnitsOfMeasurement code")
     private String code;
