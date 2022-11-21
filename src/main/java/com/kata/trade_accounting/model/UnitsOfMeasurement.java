@@ -1,0 +1,24 @@
+package com.kata.trade_accounting.model;
+
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "UnitsOfMeasurement")
+@Data
+public class UnitsOfMeasurement {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String shortName;
+    private String fullName;
+    private String code;
+
+    private boolean removed;
+}
