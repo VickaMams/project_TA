@@ -1,9 +1,13 @@
 package com.kata.trade_accounting.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(name="WarehouseDTO", description="DTO model of warehouse")
 public class WarehouseDTO {
     @Schema(description = "Warehouse ID", accessMode = Schema.AccessMode.READ_ONLY)
