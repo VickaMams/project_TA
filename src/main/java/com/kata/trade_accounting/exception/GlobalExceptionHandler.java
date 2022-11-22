@@ -33,4 +33,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error(exception.getMessage(), exception);
         return "ModelDeleted";
     }
+
+    @ExceptionHandler(value = GroupNotFoundException.class)
+    public ResponseEntity<String> groupNotFoundException(GroupNotFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

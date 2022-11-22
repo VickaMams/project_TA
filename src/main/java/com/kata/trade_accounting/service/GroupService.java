@@ -1,13 +1,13 @@
 package com.kata.trade_accounting.service;
 
-import com.kata.trade_accounting.model.Group;
+import com.kata.trade_accounting.dto.GroupDTO;
 
 import java.util.List;
 
 public interface GroupService {
-    List<Group> findAll();
-    Group getById(Long id);
-    Group save(Group group);
+    List<GroupDTO> findAll();
+    GroupDTO getById(Long id);
+    GroupDTO save(GroupDTO groupDTO);
     void deleteById(Long id);
-    Group update(Group group);
+    GroupDTO update(GroupDTO groupDTO);
 }

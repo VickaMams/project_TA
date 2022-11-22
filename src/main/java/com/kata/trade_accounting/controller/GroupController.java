@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/group")
 @AllArgsConstructor
+@Tag(name = "Group controller", description = "Group controller work ")
 public class GroupController {
 
 
@@ -35,6 +37,7 @@ public class GroupController {
 
     private final MapperGroup mapper;
 
+    @Tag(name = "Group controller")
     @Operation(summary = "Get all existing Group")
     @ApiResponses(value = {@ApiResponse(
             responseCode = "200",
@@ -49,12 +52,10 @@ public class GroupController {
     })
     @GetMapping("/")
     public ResponseEntity<List<GroupDTO>> getGroup() {
-        List<GroupDTO> dtos = service.findAll()
-                .stream().map(mapper::toDTO).toList();
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
-
+    @Tag(name = "Group controller")
     @Operation(summary = "Create new Group")
     @ApiResponses(
             value = {
@@ -73,10 +74,10 @@ public class GroupController {
     public ResponseEntity<GroupDTO> saveGroup(
             @Parameter(description = "New Group")
             @RequestBody GroupDTO dto) {
-        Group group = service.save(mapper.toEntity(dto));
-        return new ResponseEntity<>(mapper.toDTO(group), HttpStatus.OK);
+        return new ResponseEntity<>(service.save(dto), HttpStatus.OK);
     }
 
+    @Tag(name = "Group controller")
     @Operation(summary = "Delete Group")
     @ApiResponses(
             value = {
@@ -96,9 +97,10 @@ public class GroupController {
             @Parameter(description = "Group id")
             @PathVariable Long id) {
         service.deleteById(id);
-        return new ResponseEntity<>("Group deleted", HttpStatus.OK);
+        return new ResponseEntity<>("Group was deleted", HttpStatus.OK);
     }
 
+    @Tag(name = "Group controller")
     @Operation(summary = "Get groups by it id")
     @ApiResponses(
             value = {
@@ -117,10 +119,10 @@ public class GroupController {
     public ResponseEntity<GroupDTO> getById(
             @Parameter(description = "Group id")
             @PathVariable Long id) {
-        GroupDTO dto = mapper.toDTO(service.getById(id));
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
+    @Tag(name = "Group controller")
     @Operation(summary = "Edit specific Group")
     @ApiResponses(
             value = {
@@ -141,8 +143,6 @@ public class GroupController {
             @PathVariable Long id,
             @Parameter(description = "Information which must be updated")
             @RequestBody GroupDTO dto) {
-        dto.setId(id);
-        Group group = service.update(mapper.toEntity(dto));
-        return new ResponseEntity<>(mapper.toDTO(group), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(dto), HttpStatus.OK);
     }
 }
