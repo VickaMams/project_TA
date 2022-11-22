@@ -37,16 +37,16 @@ public class GroupController {
 
     @Operation(summary = "Get all existing Group")
     @ApiResponses(value = {@ApiResponse(
-                            responseCode = "200",
-                            description = "Got information about all existing Group",
-                            content = {
-                                    @Content(
-                                            mediaType = "application/json",
-                                            schema = @Schema(implementation = GroupDTO.class))
-                            }),
-                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
-                    @ApiResponse(responseCode = "404", description = "Group not found", content = @Content)
-            })
+            responseCode = "200",
+            description = "Got information about all existing Group",
+            content = {
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = GroupDTO.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Group not found", content = @Content)
+    })
     @GetMapping("/")
     public ResponseEntity<List<GroupDTO>> getGroup() {
         List<GroupDTO> dtos = service.findAll()

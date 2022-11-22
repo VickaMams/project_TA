@@ -24,4 +24,5 @@ public class Group {
     private String employee;
     private String department;
     private boolean sharedAccess;
+    private boolean removed;
 }
