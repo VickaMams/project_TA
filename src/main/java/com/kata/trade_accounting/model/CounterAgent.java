@@ -1,5 +1,6 @@
 package com.kata.trade_accounting.model;
 
+import com.kata.trade_accounting.dto.CounterAgentStatus;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -20,6 +21,8 @@ public class CounterAgent {
     @ApiModelProperty(notes = "Name of the legal entity", required = true)
     private String name;
 
+    @ApiModelProperty(notes = "Current status of counter agent out of pre-defined 5 values")
+    private CounterAgentStatus status;
     @ApiModelProperty(notes = "Phone number")
     private String phoneNumber;
     @ApiModelProperty(notes = "Fax number")
