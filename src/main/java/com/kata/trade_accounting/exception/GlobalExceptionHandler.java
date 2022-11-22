@@ -13,8 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = GroupNullPointerException.class)
-    public ResponseEntity<String> lawDetailsNotFoundException(GroupNullPointerException exception) {
+    @ExceptionHandler(value = LawDetailsNotFoundException.class)
+    public ResponseEntity<String> lawDetailsNotFoundException(LawDetailsNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
@@ -26,11 +26,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return "ID_not_found";
     }
 
-//    @ExceptionHandler(ModelDeletedException.class)
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    @ResponseBody
-//    public String handleModelDeletedException(ModelDeletedException exception) {
-//        log.error(exception.getMessage(), exception);
-//        return "ModelDeleted";
-//    }
+    @ExceptionHandler(ModelDeletedException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public String handleModelDeletedException(ModelDeletedException exception) {
+        log.error(exception.getMessage(), exception);
+        return "ModelDeleted";
+    }
 }
