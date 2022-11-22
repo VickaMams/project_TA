@@ -23,7 +23,18 @@ public class Worker {
     @Column(nullable = false, length = 50)
     private String last_name;
 
-    private double salary;
+    private String patronymic;
+
+    private String telephone;
+
+    private String email;
+
+    private String Login;
+
+    private String description;
+
+    private String Role; // need an entity Role to implement
+
 
 
 
