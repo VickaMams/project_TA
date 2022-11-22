@@ -56,7 +56,7 @@ public class UnitsOfMeasurementDTOServiceImpl implements UnitsOfMeasurementDTOSe
     public void deleteById(Long id) {
         int i = unitsOfMeasurementRepository.setRemovedTrue(id);
         if (i == 0) {
-            throw new LawDetailsNotFoundException(String.format("UnitsOfMeasurement with id=%s not found", id));
+            throw new IdNotFoundException(String.format("UnitsOfMeasurement with id=%s not found", id));
         }
     }
 
