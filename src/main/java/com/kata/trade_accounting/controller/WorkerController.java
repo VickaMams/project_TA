@@ -3,6 +3,13 @@ package com.kata.trade_accounting.controller;
 import com.kata.trade_accounting.dto.WorkerDto;
 import com.kata.trade_accounting.model.Worker;
 import com.kata.trade_accounting.service.WorkerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/worker")
+@Tag(name = "Operation with Worker", description = "Basic crud operation with Worker")
 public class WorkerController {
 
     private final WorkerService workerService;
@@ -25,6 +33,21 @@ public class WorkerController {
         this.modelMapper = modelMapper;
     }
 
+    @Operation(summary = "Get all existing Worker")
+    @Tag(name = "Operation with Worker")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Got information about all existing Worker",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = WorkerDto.class)))
+                            }),
+                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
+            })
     @GetMapping("/")
     public ResponseEntity<List<WorkerDto>> getWorkers() {
 
@@ -35,6 +58,22 @@ public class WorkerController {
         return new ResponseEntity<>(workerDto, HttpStatus.OK);
     }
 
+
+    @Operation(summary = "Get all existing Worker")
+    @Tag(name = "Operation with Worker")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Got information about all existing Worker",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = WorkerDto.class)))
+                            }),
+                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
+            })
     @PostMapping("/create")
     public ResponseEntity<String> createWorker(@RequestBody Worker worker) {
 
@@ -43,6 +82,21 @@ public class WorkerController {
         return new ResponseEntity<>("Worker successfully created", HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all existing Worker")
+    @Tag(name = "Operation with Worker")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Got information about all existing Worker",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = WorkerDto.class)))
+                            }),
+                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
+            })
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> pageDelete(@PathVariable long id) {
 
@@ -51,6 +105,21 @@ public class WorkerController {
         return new ResponseEntity<>("Worker successfully deleted", HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all existing Worker")
+    @Tag(name = "Operation with Worker")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Got information about all existing Worker",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = WorkerDto.class)))
+                            }),
+                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
+            })
     @GetMapping("getById/{id}")
     public ResponseEntity<WorkerDto> getWorker(@PathVariable long id) {
 
@@ -59,6 +128,21 @@ public class WorkerController {
         return new ResponseEntity<>(worker, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all existing Worker")
+    @Tag(name = "Operation with Worker")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Got information about all existing Worker",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = WorkerDto.class)))
+                            }),
+                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
+            })
     @GetMapping("getByName/{name}")
     public ResponseEntity<WorkerDto> getWorkerByName(@PathVariable String name) {
         WorkerDto worker = modelMapper.map(workerService.findByWorkerName(name), WorkerDto.class);
@@ -66,6 +150,21 @@ public class WorkerController {
         return new ResponseEntity<>(worker, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all existing Worker")
+    @Tag(name = "Operation with Worker")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Got information about all existing Worker",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = WorkerDto.class)))
+                            }),
+                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
+            })
     @PutMapping("edit/{id}")
     public ResponseEntity<String> editWorker(@PathVariable("id") long id, @RequestBody Worker worker) {
         worker.setId(id);
