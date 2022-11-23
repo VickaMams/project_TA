@@ -1,7 +1,7 @@
 package com.kata.trade_accounting.controller;
 
 import com.kata.trade_accounting.dto.WorkerDto;
-import com.kata.trade_accounting.model.Worker;
+import com.kata.trade_accounting.mapper.WorkerMapper;
 import com.kata.trade_accounting.service.WorkerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -25,12 +25,12 @@ public class WorkerController {
 
     private final WorkerService workerService;
 
-    private final ModelMapper modelMapper;
+    private final WorkerMapper workerMapper;
 
     @Autowired
-    public WorkerController(WorkerService workerService, ModelMapper modelMapper) {
+    public WorkerController(WorkerService workerService, WorkerMapper workerMapper) {
         this.workerService = workerService;
-        this.modelMapper = modelMapper;
+        this.workerMapper = workerMapper;
     }
 
     @Operation(summary = "Get all existing Worker")
@@ -52,7 +52,7 @@ public class WorkerController {
     public ResponseEntity<List<WorkerDto>> getWorkers() {
 
         List<WorkerDto> workerDto = workerService.findAll()
-                .stream().map(worker -> modelMapper.map(worker, WorkerDto.class))
+                .stream().map(worker -> workerMapper.map(worker, WorkerDto.class))
                 .toList();
 
         return new ResponseEntity<>(workerDto, HttpStatus.OK);
@@ -75,9 +75,9 @@ public class WorkerController {
                     @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
             })
     @PostMapping("/create")
-    public ResponseEntity<String> createWorker(@RequestBody Worker worker) {
+    public ResponseEntity<String> createWorker(@RequestBody WorkerDto workerDto) {
 
-        workerService.save(worker);
+        workerService.save(workerDto);
 
         return new ResponseEntity<>("Worker successfully created", HttpStatus.OK);
     }
@@ -123,7 +123,7 @@ public class WorkerController {
     @GetMapping("getById/{id}")
     public ResponseEntity<WorkerDto> getWorker(@PathVariable long id) {
 
-        WorkerDto worker = modelMapper.map(workerService.getById(id), WorkerDto.class);
+        WorkerDto worker = workerMapper.map(workerService.getById(id), WorkerDto.class);
 
         return new ResponseEntity<>(worker, HttpStatus.OK);
     }
@@ -145,9 +145,9 @@ public class WorkerController {
             })
     @GetMapping("getByName/{name}")
     public ResponseEntity<WorkerDto> getWorkerByName(@PathVariable String name) {
-        WorkerDto worker = modelMapper.map(workerService.findByWorkerName(name), WorkerDto.class);
+        WorkerDto workerDto = workerMapper.map(workerService.findByWorkerName(name), WorkerDto.class);
 
-        return new ResponseEntity<>(worker, HttpStatus.OK);
+        return new ResponseEntity<>(workerDto, HttpStatus.OK);
     }
 
     @Operation(summary = "Get all existing Worker")
@@ -166,9 +166,9 @@ public class WorkerController {
                     @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
             })
     @PutMapping("edit/{id}")
-    public ResponseEntity<String> editWorker(@PathVariable("id") long id, @RequestBody Worker worker) {
-        worker.setId(id);
-        workerService.update(worker);
+    public ResponseEntity<String> editWorker(@PathVariable("id") long id, @RequestBody WorkerDto workerDto) {
+//        workerDto.setId(id);
+        workerService.update(id, workerDto);
 
         return new ResponseEntity<>("Worker successfully updated", HttpStatus.OK);
     }

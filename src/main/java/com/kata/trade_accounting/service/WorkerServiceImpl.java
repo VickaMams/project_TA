@@ -1,8 +1,15 @@
 package com.kata.trade_accounting.service;
 
+import com.kata.trade_accounting.dto.WorkerDto;
+import com.kata.trade_accounting.exception.LawDetailsNotFoundException;
+import com.kata.trade_accounting.exception.WorkerNotFoundException;
+import com.kata.trade_accounting.mapper.WarehouseMapper;
+import com.kata.trade_accounting.mapper.WorkerMapper;
+import com.kata.trade_accounting.model.LawDetails;
 import com.kata.trade_accounting.model.Worker;
 import com.kata.trade_accounting.repository.WorkerDao;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -17,65 +24,65 @@ import java.util.Optional;
 public class WorkerServiceImpl implements WorkerService {
 
     private final WorkerDao workerDAO;
+    private final WorkerMapper mapper;
 
-    public WorkerServiceImpl(WorkerDao workerDAO) {
+    public WorkerServiceImpl(WorkerDao workerDAO, WorkerMapper mapper) {
         this.workerDAO = workerDAO;
+        this.mapper = mapper;
     }
 
 
     @Override
     @Nullable
-    public List<Worker> findAll() throws ResponseStatusException {
-        List<Worker> workers = workerDAO.findAll();
-        if (!workers.isEmpty()) {
-            log.info("Getting list of workers");
-            return workers;
-        } else {
-            log.info("List workers is empty");
-            //need custom http status code
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+    public List<WorkerDto> findAll() throws ResponseStatusException {
+        return workerDAO.findAll()
+                .stream().map(mapper::toDto).toList();
     }
 
     @Override
     @Nullable
-    public Worker getById(long id) {
+    public WorkerDto getById(long id) {
         Optional<Worker> worker = workerDAO.findById(id);
         if (worker.isPresent()) {
-            log.info("Workers with id #id={} is found", id);
-            return worker.get();
+            return mapper.toDto(worker.get());
         } else {
-            log.info("Worker with id #id={} not found", id);
-            //need custom http status code
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new WorkerNotFoundException(String.format("Worker with id=%s not found", id));
         }
     }
 
     @Transactional
     @Override
-    public void save(Worker worker) {
-        workerDAO.save(worker);
-        log.info("Worker with #id={} successfully saved", worker.getId());
+    public WorkerDto save(WorkerDto workerDto) {
+        Worker entity = workerDAO.save(mapper.toEntity(workerDto));
+        entity.setRemoved(false);
+        return mapper.toDto(entity);
     }
 
     @Transactional
     @Override
     public void deleteById(long id) {
-        workerDAO.deleteById(id);
-        log.info("Worker with #id={} successfully deleted", id);
+        int i = workerDAO.setRemovedTrue(id);
+        if (i == 0) {
+            throw new WorkerNotFoundException(String.format("Worker with id=%s not found", id));
+        }
     }
 
     @Override
-    public Worker findByWorkerName(String name) {
-        Worker worker = workerDAO.findWorkerByName(name);
+    public WorkerDto findByWorkerName(String name) {
+        WorkerDto workerDto = workerDAO.findWorkerByName(name);
         log.info("Worker with #name={} successfully find", name);
-        return worker;
+        return workerDto ;
     }
 
     @Transactional
     @Override
-    public void update(Worker worker) {
-        workerDAO.save(worker);
-        log.info("Worker with #id={} successfully updated", worker.getId());
+    public WorkerDto update(Long id, WorkerDto workerDto) {
+        Optional<Worker> worker= workerDAO.findById(id);
+        if (worker.isPresent()) {
+            workerDto.setId(id);
+            return save(workerDto);
+        } else {
+            throw new LawDetailsNotFoundException(String.format("Worker with id=%s not found", id));
+        }
     }
 }

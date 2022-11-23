@@ -54,4 +54,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error(exception.getMessage(), exception);
         return "ModelDeleted";
     }
+
+    @ExceptionHandler(WorkerNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public String handleWorkerNotFoundException(WorkerNotFoundException workerNotFoundException) {
+        log.error(workerNotFoundException.getMessage(), workerNotFoundException);
+        return "Worker not found";
+
+    }
 }

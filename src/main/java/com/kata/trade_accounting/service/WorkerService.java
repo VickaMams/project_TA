@@ -1,19 +1,20 @@
 package com.kata.trade_accounting.service;
 
+import com.kata.trade_accounting.dto.WorkerDto;
 import com.kata.trade_accounting.model.Worker;
 
 import java.util.List;
 
 public interface WorkerService {
-    List<Worker> findAll();
+    List<WorkerDto> findAll();
 
-    Worker getById(long id);
+    WorkerDto getById(long id);
 
-    void save(Worker worker);
+     WorkerDto save(WorkerDto workerDto);
 
     void deleteById(long id);
 
-    Worker findByWorkerName(String name);
+    WorkerDto findByWorkerName(String name);
 
-    void update(Worker worker);
+    WorkerDto update(Long id, WorkerDto workerDto);
 }

@@ -35,6 +35,8 @@ public class Worker {
 
     private String Role; // need an entity Role to implement
 
+    private boolean removed;
+
 
 
 
