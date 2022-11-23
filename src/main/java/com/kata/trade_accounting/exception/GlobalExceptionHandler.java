@@ -13,8 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = LawDetailsNotFoundException.class)
-    public ResponseEntity<String> lawDetailsNotFoundException(LawDetailsNotFoundException exception) {
+    @ExceptionHandler(value = CounterAgentNotFoundException.class)
+    public ResponseEntity<String> counterAgentNotFoundException(CounterAgentNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
