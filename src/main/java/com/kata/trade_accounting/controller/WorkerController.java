@@ -25,11 +25,14 @@ public class WorkerController {
 
     private final WorkerService workerService;
 
+    private final ModelMapper modelMapper;
+
     private final WorkerMapper workerMapper;
 
     @Autowired
-    public WorkerController(WorkerService workerService, WorkerMapper workerMapper) {
+    public WorkerController(WorkerService workerService, ModelMapper modelMapper, WorkerMapper workerMapper) {
         this.workerService = workerService;
+        this.modelMapper = modelMapper;
         this.workerMapper = workerMapper;
     }
 
@@ -52,7 +55,7 @@ public class WorkerController {
     public ResponseEntity<List<WorkerDto>> getWorkers() {
 
         List<WorkerDto> workerDto = workerService.findAll()
-                .stream().map(worker -> workerMapper.map(worker, WorkerDto.class))
+                .stream().map(worker -> modelMapper.map(worker, WorkerDto.class))
                 .toList();
 
         return new ResponseEntity<>(workerDto, HttpStatus.OK);
@@ -123,32 +126,32 @@ public class WorkerController {
     @GetMapping("getById/{id}")
     public ResponseEntity<WorkerDto> getWorker(@PathVariable long id) {
 
-        WorkerDto worker = workerMapper.map(workerService.getById(id), WorkerDto.class);
+        WorkerDto worker = modelMapper.map(workerService.getById(id), WorkerDto.class);
 
         return new ResponseEntity<>(worker, HttpStatus.OK);
     }
 
-    @Operation(summary = "Get all existing Worker")
-    @Tag(name = "Operation with Worker")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Got information about all existing Worker",
-                            content = {
-                                    @Content(
-                                            mediaType = "application/json",
-                                            array = @ArraySchema(schema = @Schema(implementation = WorkerDto.class)))
-                            }),
-                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
-                    @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
-            })
-    @GetMapping("getByName/{name}")
-    public ResponseEntity<WorkerDto> getWorkerByName(@PathVariable String name) {
-        WorkerDto workerDto = workerMapper.map(workerService.findByWorkerName(name), WorkerDto.class);
-
-        return new ResponseEntity<>(workerDto, HttpStatus.OK);
-    }
+//    @Operation(summary = "Get all existing Worker")
+//    @Tag(name = "Operation with Worker")
+//    @ApiResponses(
+//            value = {
+//                    @ApiResponse(
+//                            responseCode = "200",
+//                            description = "Got information about all existing Worker",
+//                            content = {
+//                                    @Content(
+//                                            mediaType = "application/json",
+//                                            array = @ArraySchema(schema = @Schema(implementation = WorkerDto.class)))
+//                            }),
+//                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+//                    @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
+//            })
+//    @GetMapping("getByName/{name}")
+//    public ResponseEntity<WorkerDto> getWorkerByName(@PathVariable String name) {
+//        WorkerDto workerDto = workerMapper.map(workerService.findByWorkerName(name), WorkerDto.class);
+//
+//        return new ResponseEntity<>(workerDto, HttpStatus.OK);
+//    }
 
     @Operation(summary = "Get all existing Worker")
     @Tag(name = "Operation with Worker")
