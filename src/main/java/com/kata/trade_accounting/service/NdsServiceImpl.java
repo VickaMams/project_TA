@@ -29,8 +29,7 @@ public class NdsServiceImpl implements NdsService {
 
     @Override
     public void saveNds(NdsDto ndsDto) {
-        Nds nds = ndsMapper.toNds(ndsDto);
-        ndsDao.save(nds);
+        ndsDao.save(ndsMapper.toNds(ndsDto));
     }
 
     @Override
