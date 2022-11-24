@@ -43,7 +43,6 @@ public class SalesChannelServiceImpl implements SalesChannelService{
     @Transactional
     public SalesChannelDTO save(SalesChannelDTO dto) {
         SalesChannel salesChannel = repository.save(mapper.toEntity(dto));
-        salesChannel.setRemoved(false);
         return mapper.toDto(salesChannel);
     }
 
