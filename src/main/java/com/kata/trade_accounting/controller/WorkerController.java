@@ -121,9 +121,7 @@ public class WorkerController {
     @GetMapping("getById/{id}")
     public ResponseEntity<WorkerDto> getWorker(@PathVariable long id) {
 
-        WorkerDto worker = modelMapper.map(workerService.getById(id), WorkerDto.class);
-
-        return new ResponseEntity<>(worker, HttpStatus.OK);
+        return new ResponseEntity<>(workerService.getById(id), HttpStatus.OK);
     }
 
 

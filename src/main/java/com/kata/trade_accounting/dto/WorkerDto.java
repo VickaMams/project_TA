@@ -30,11 +30,11 @@ public class WorkerDto {
 
     private String email;
 
-    private String Login;
+    private String login;
 
     private String description;
 
-    private String Role; // need an entity Role to implement
+    //private String role; // need an entity Role to implement
 
 
 
