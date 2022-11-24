@@ -9,5 +9,5 @@ public interface CountryMapper {
 
     CountryDTO toDto(Country country);
 
-    Country dtoToModel(CountryDTO countryDTO);
+    Country toModel(CountryDTO countryDTO);
 }
