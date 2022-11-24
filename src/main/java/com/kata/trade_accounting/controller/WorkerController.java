@@ -53,12 +53,7 @@ public class WorkerController {
             })
     @GetMapping("/")
     public ResponseEntity<List<WorkerDto>> getWorkers() {
-
-        List<WorkerDto> workerDto = workerService.findAll()
-                .stream().map(worker -> modelMapper.map(worker, WorkerDto.class))
-                .toList();
-
-        return new ResponseEntity<>(workerDto, HttpStatus.OK);
+        return new ResponseEntity<>(workerService.findAll(), HttpStatus.OK);
     }
 
 
@@ -149,7 +144,6 @@ public class WorkerController {
             })
     @PutMapping("edit/{id}")
     public ResponseEntity<String> editWorker(@PathVariable("id") long id, @RequestBody WorkerDto workerDto) {
-//        workerDto.setId(id);
         workerService.update(id, workerDto);
 
         return new ResponseEntity<>("Worker successfully updated", HttpStatus.OK);

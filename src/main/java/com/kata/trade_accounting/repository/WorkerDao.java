@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WorkerDao extends JpaRepository<Worker, Long> {
-    WorkerDto findWorkerByName(String name);
 
     @Modifying
     @Query("update Worker set removed = true where id = ?1")

@@ -50,7 +50,7 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public WorkerDto save(WorkerDto workerDto) {
         Worker entity = workerDAO.save(mapper.toEntity(workerDto));
-        entity.setRemoved(false);
+        entity.setRemoved(true);
         return mapper.toDto(entity);
     }
 
@@ -61,13 +61,6 @@ public class WorkerServiceImpl implements WorkerService {
         if (i == 0) {
             throw new WorkerNotFoundException(String.format("Worker with id=%s not found", id));
         }
-    }
-
-    @Override
-    public WorkerDto findByWorkerName(String name) {
-        WorkerDto workerDto = workerDAO.findWorkerByName(name);
-        log.info("Worker with #name={} successfully find", name);
-        return workerDto ;
     }
 
     @Transactional

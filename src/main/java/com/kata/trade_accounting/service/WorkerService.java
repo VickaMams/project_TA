@@ -14,7 +14,5 @@ public interface WorkerService {
 
     void deleteById(long id);
 
-    WorkerDto findByWorkerName(String name);
-
     WorkerDto update(Long id, WorkerDto workerDto);
 }
