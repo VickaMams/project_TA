@@ -1,6 +1,10 @@
 package com.kata.trade_accounting.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -14,14 +18,10 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class WorkerDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(nullable = false, length = 50)
     private String last_name;
 
     private String patronymic;
