@@ -1,18 +1,19 @@
 package com.kata.trade_accounting.service;
 
+import com.kata.trade_accounting.dto.CountryDTO;
 import com.kata.trade_accounting.model.Country;
 
 import java.util.List;
 
 public interface CountryService {
 
-    List<Country> findAll();
+    List<CountryDTO> findAll();
 
-    Country getById(Long id);
+    CountryDTO findById(Long id);
 
     void save(Country country);
 
     void deleteById(Long id);
 
-    Country update(Country country);
+    CountryDTO update(CountryDTO countryDTO, Long id);
  }
