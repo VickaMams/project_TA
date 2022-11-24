@@ -2,7 +2,7 @@ package com.kata.trade_accounting.service;
 
 import com.kata.trade_accounting.dto.LawDetailsDTO;
 import com.kata.trade_accounting.exception.LawDetailsNotFoundException;
-import com.kata.trade_accounting.controller.mapper.LawDetailsMapper;
+import com.kata.trade_accounting.mapper.LawDetailsMapper;
 import com.kata.trade_accounting.model.LawDetails;
 import com.kata.trade_accounting.repository.LawDetailsRepository;
 import org.springframework.stereotype.Service;

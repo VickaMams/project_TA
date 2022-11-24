@@ -1,4 +1,4 @@
-package com.kata.trade_accounting.controller.mapper;
+package com.kata.trade_accounting.mapper;
 
 import com.kata.trade_accounting.dto.UnitsOfMeasurementDTO;
 import com.kata.trade_accounting.model.UnitsOfMeasurement;

@@ -3,7 +3,7 @@ package com.kata.trade_accounting.service;
 import com.kata.trade_accounting.dto.UnitsOfMeasurementDTO;
 import com.kata.trade_accounting.exception.IdNotFoundException;
 import com.kata.trade_accounting.exception.ModelDeletedException;
-import com.kata.trade_accounting.controller.mapper.UnitsOfMeasurementMapper;
+import com.kata.trade_accounting.mapper.UnitsOfMeasurementMapper;
 import com.kata.trade_accounting.model.UnitsOfMeasurement;
 import com.kata.trade_accounting.repository.UnitsOfMeasurementRepository;
 import lombok.AllArgsConstructor;

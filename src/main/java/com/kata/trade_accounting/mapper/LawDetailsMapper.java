@@ -1,4 +1,4 @@
-package com.kata.trade_accounting.controller.mapper;
+package com.kata.trade_accounting.mapper;
 
 import com.kata.trade_accounting.dto.LawDetailsDTO;
 import com.kata.trade_accounting.model.LawDetails;

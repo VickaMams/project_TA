@@ -4,7 +4,7 @@ package com.kata.trade_accounting.service;
 import com.kata.trade_accounting.dto.ProductDTO;
 import com.kata.trade_accounting.exception.IdNotFoundException;
 import com.kata.trade_accounting.exception.ProductNotFoundException;
-import com.kata.trade_accounting.controller.mapper.ProductMapper;
+import com.kata.trade_accounting.mapper.ProductMapper;
 import com.kata.trade_accounting.model.Product;
 import com.kata.trade_accounting.repository.ProductRepository;
 import lombok.AllArgsConstructor;

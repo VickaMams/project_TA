@@ -2,7 +2,7 @@ package com.kata.trade_accounting.controller;
 
 
 import com.kata.trade_accounting.dto.GroupDTO;
-import com.kata.trade_accounting.controller.mapper.GroupMapper;
+import com.kata.trade_accounting.mapper.GroupMapper;
 import com.kata.trade_accounting.service.GroupService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

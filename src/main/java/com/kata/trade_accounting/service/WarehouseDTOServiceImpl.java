@@ -4,7 +4,7 @@ import com.kata.trade_accounting.dto.WarehouseDTO;
 import com.kata.trade_accounting.exception.IdNotFoundException;
 import com.kata.trade_accounting.exception.LawDetailsNotFoundException;
 import com.kata.trade_accounting.exception.ModelDeletedException;
-import com.kata.trade_accounting.controller.mapper.WarehouseMapper;
+import com.kata.trade_accounting.mapper.WarehouseMapper;
 import com.kata.trade_accounting.model.Warehouse;
 import com.kata.trade_accounting.repository.WarehouseRepository;
 import lombok.AllArgsConstructor;

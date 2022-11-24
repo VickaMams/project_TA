@@ -1,7 +1,7 @@
 package com.kata.trade_accounting.controller;
 
 import com.kata.trade_accounting.dto.NdsDto;
-import com.kata.trade_accounting.controller.mapper.NdsDtoMapper;
+import com.kata.trade_accounting.mapper.NdsDtoMapper;
 import com.kata.trade_accounting.service.NdsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
