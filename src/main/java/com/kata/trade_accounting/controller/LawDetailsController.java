@@ -1,7 +1,7 @@
 package com.kata.trade_accounting.controller;
 
 import com.kata.trade_accounting.dto.LawDetailsDTO;
-import com.kata.trade_accounting.mapper.LawDetailsMapper;
+import com.kata.trade_accounting.controller.mapper.LawDetailsMapper;
 import com.kata.trade_accounting.service.LawDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

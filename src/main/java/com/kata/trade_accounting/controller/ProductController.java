@@ -2,7 +2,6 @@ package com.kata.trade_accounting.controller;
 
 
 import com.kata.trade_accounting.dto.ProductDTO;
-import com.kata.trade_accounting.mapper.ProductMapper;
 import com.kata.trade_accounting.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,8 +32,6 @@ public class ProductController {
 
 
     private final ProductService service;
-
-    private final ProductMapper mapper;
 
     @Tag(name = "Product controller")
     @Operation(summary = "Get all existing Product")
@@ -105,7 +102,7 @@ public class ProductController {
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Information about specific Product",
+                            description = "Information about specific product",
                             content = {
                                     @Content(
                                             mediaType = "application/json",
@@ -127,7 +124,7 @@ public class ProductController {
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Law Details edited",
+                            description = "Product edited",
                             content = {
                                     @Content(
                                             mediaType = "application/json",

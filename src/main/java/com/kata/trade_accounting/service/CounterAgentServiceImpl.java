@@ -2,7 +2,7 @@ package com.kata.trade_accounting.service;
 
 import com.kata.trade_accounting.dto.CounterAgentDto;
 import com.kata.trade_accounting.exception.CounterAgentNotFoundException;
-import com.kata.trade_accounting.mapper.CounterAgentMapper;
+import com.kata.trade_accounting.controller.mapper.CounterAgentMapper;
 import com.kata.trade_accounting.model.CounterAgent;
 import com.kata.trade_accounting.repository.CounterAgentRepository;
 import org.springframework.data.domain.Example;
