@@ -28,11 +28,15 @@ public class Product {
     private String article;
     private String code;
     private String externalCode;
-    @Transient
+
+    @ManyToOne
+    @JoinColumn(name = "unit_of_measurement_id")
     private UnitsOfMeasurement unitOfMeasurement;
     private String weight;
     private String volume;
-    @Transient
+
+    @ManyToOne
+    @JoinColumn(name = "nds_id")
     private Nds NDS;
 
     private boolean thisProduct;

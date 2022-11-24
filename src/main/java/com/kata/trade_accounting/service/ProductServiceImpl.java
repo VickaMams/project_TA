@@ -46,9 +46,9 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public ProductDTO update(ProductDTO productDTO) {
         Product product = repository.findById(productDTO.getId())
-                .orElseThrow(() -> new IdNotFoundException("No such warehouse with ID " + productDTO.getId()));
+                .orElseThrow(() -> new IdNotFoundException("No such product with ID " + productDTO.getId()));
         if (product.isRemoved()) {
-            throw new IdNotFoundException("Warehouse was deleted" + productDTO.getId());
+            throw new IdNotFoundException("Product was deleted" + productDTO.getId());
         }
         repository.save(mapper.toEntity(productDTO));
         return productDTO;
