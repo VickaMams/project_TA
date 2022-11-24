@@ -3,7 +3,7 @@ package com.kata.trade_accounting.service;
 import com.kata.trade_accounting.dto.GroupDTO;
 import com.kata.trade_accounting.exception.GroupNotFoundException;
 import com.kata.trade_accounting.exception.IdNotFoundException;
-import com.kata.trade_accounting.mapper.MapperGroup;
+import com.kata.trade_accounting.mapper.GroupMapper;
 import com.kata.trade_accounting.model.Group;
 import com.kata.trade_accounting.repository.GroupRepository;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.List;
 public class GroupServiceImpl implements GroupService {
 
     private final GroupRepository repository;
-    private final MapperGroup mapper;
+    private final GroupMapper mapper;
 
     @Override
     public List<GroupDTO> findAll() {
