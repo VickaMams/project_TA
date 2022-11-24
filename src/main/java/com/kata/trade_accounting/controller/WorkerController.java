@@ -25,15 +25,15 @@ public class WorkerController {
 
     private final WorkerService workerService;
 
-    private final ModelMapper modelMapper;
-
-    private final WorkerMapper workerMapper;
+//    private final ModelMapper modelMapper;
+//
+//    private final WorkerMapper workerMapper;
 
     @Autowired
-    public WorkerController(WorkerService workerService, ModelMapper modelMapper, WorkerMapper workerMapper) {
+    public WorkerController(WorkerService workerService) {
         this.workerService = workerService;
-        this.modelMapper = modelMapper;
-        this.workerMapper = workerMapper;
+//        this.modelMapper = modelMapper;
+//        this.workerMapper = workerMapper;
     }
 
     @Operation(summary = "Get all existing Worker")

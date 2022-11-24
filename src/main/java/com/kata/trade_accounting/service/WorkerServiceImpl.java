@@ -50,7 +50,7 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public WorkerDto save(WorkerDto workerDto) {
         Worker entity = workerDAO.save(mapper.toEntity(workerDto));
-        entity.setRemoved(true);
+        entity.setRemoved(false);
         return mapper.toDto(entity);
     }
 
@@ -71,7 +71,7 @@ public class WorkerServiceImpl implements WorkerService {
             workerDto.setId(id);
             return save(workerDto);
         } else {
-            throw new LawDetailsNotFoundException(String.format("Worker with id=%s not found", id));
+            throw new WorkerNotFoundException(String.format("Worker with id=%s not found", id));
         }
     }
 }
