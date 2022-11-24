@@ -1,9 +1,16 @@
 package com.kata.trade_accounting.model;
 
 
-import lombok.*;
-
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Setter
@@ -29,11 +36,11 @@ public class Worker {
 
     private String email;
 
-    private String Login;
+    private String login;
 
     private String description;
 
-    private String Role; // need an entity Role to implement
+   // private String role; need an entity Role to implement
 
     private boolean removed;
 

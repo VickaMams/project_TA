@@ -131,27 +131,6 @@ public class WorkerController {
         return new ResponseEntity<>(worker, HttpStatus.OK);
     }
 
-//    @Operation(summary = "Get all existing Worker")
-//    @Tag(name = "Operation with Worker")
-//    @ApiResponses(
-//            value = {
-//                    @ApiResponse(
-//                            responseCode = "200",
-//                            description = "Got information about all existing Worker",
-//                            content = {
-//                                    @Content(
-//                                            mediaType = "application/json",
-//                                            array = @ArraySchema(schema = @Schema(implementation = WorkerDto.class)))
-//                            }),
-//                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
-//                    @ApiResponse(responseCode = "404", description = "Worker not found", content = @Content)
-//            })
-//    @GetMapping("getByName/{name}")
-//    public ResponseEntity<WorkerDto> getWorkerByName(@PathVariable String name) {
-//        WorkerDto workerDto = workerMapper.map(workerService.findByWorkerName(name), WorkerDto.class);
-//
-//        return new ResponseEntity<>(workerDto, HttpStatus.OK);
-//    }
 
     @Operation(summary = "Get all existing Worker")
     @Tag(name = "Operation with Worker")
