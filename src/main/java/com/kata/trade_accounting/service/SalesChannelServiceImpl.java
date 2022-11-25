@@ -49,13 +49,8 @@ public class SalesChannelServiceImpl implements SalesChannelService{
     @Override
     @Transactional
     public void deleteById(Long id) {
-        Optional<SalesChannel> salesChannel = repository.findById(id);
-        if (salesChannel.isPresent()) {
-            if (salesChannel.get().isRemoved()) {
-                throw new ModelDeletedException(String.format("Sales Channel with id = %s already deleted", id));
-            }
-            repository.setRemovedTrue(id);
-        } else {
+        int i = repository.setRemovedTrue(id);
+        if (i == 0) {
             throw new IdNotFoundException(String.format("Sales Channel with id = %s not found", id));
         }
     }

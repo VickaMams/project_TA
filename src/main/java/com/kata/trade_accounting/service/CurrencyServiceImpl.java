@@ -49,13 +49,8 @@ public class CurrencyServiceImpl  implements CurrencyService{
     @Override
     @Transactional
     public void deleteById(Long id) {
-        Optional<Currency> currency = repository.findById(id);
-        if (currency.isPresent()){
-            if (currency.get().isRemoved()){
-                throw new CurrencyNotFoundException(String.format("Currency with id =%s already deleted", id));
-            }
-            repository.setRemovedTrue(id);
-        } else {
+        int i = repository.setRemovedTrue(id);
+        if (i == 0) {
             throw new CurrencyNotFoundException(String.format("Currency with id =%s not found", id));
         }
     }
