@@ -4,7 +4,7 @@ import com.kata.trade_accounting.dto.CounterAgentDto;
 
 import java.util.List;
 
-public interface CounterAgentService {
+public interface   CounterAgentService {
 
     void add(CounterAgentDto counterAgent);
 
