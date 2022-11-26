@@ -1,11 +1,8 @@
 package com.kata.trade_accounting.dto;
 
-import com.kata.trade_accounting.model.CounterAgent;
 import com.kata.trade_accounting.model.DocumentExpenseItem;
 import com.kata.trade_accounting.model.DocumentStatus;
 import com.kata.trade_accounting.model.DocumentType;
-import com.kata.trade_accounting.model.SalesChannel;
-import com.kata.trade_accounting.model.Warehouse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
