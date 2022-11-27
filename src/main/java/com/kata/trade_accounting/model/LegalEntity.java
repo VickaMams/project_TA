@@ -73,11 +73,12 @@ public class LegalEntity {
     private byte[] logoPic;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "law_details_id")
     private LawDetails lawDetails;
 
+//  TODO реализовать карточку адресс
 //    OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn (name = "id")
+//    @JoinColumn (name = "address_id")
 //    private Address factAddress;
 
 
