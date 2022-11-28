@@ -57,7 +57,7 @@ public class ProductController {
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Product created",
+                            description = "Prod uct created",
                             content = {
                                     @Content(
                                             mediaType = "application/json",
