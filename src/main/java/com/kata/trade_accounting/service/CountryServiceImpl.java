@@ -2,6 +2,7 @@ package com.kata.trade_accounting.service;
 
 import com.kata.trade_accounting.dto.CountryDTO;
 import com.kata.trade_accounting.exception.CountryNotFoundException;
+import com.kata.trade_accounting.exception.LawDetailsNotFoundException;
 import com.kata.trade_accounting.mapper.CountryMapper;
 import com.kata.trade_accounting.model.Country;
 import com.kata.trade_accounting.repository.CountryRepository;
@@ -41,10 +42,10 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public void deleteById(Long id) {
-        Country country = countryRepository.findById(id)
-                .orElseThrow(() -> new CountryNotFoundException(String.format("Countries with id=%s not found", id)));
-        country.setRemoved(true);
-        countryMapper.toDto(countryRepository.save(country));
+        int i = countryRepository.setRemovedTrue(id);
+        if (i == 0) {
+            throw new LawDetailsNotFoundException(String.format("Countries with id=%s not found", id));
+        }
     }
 
     @Override
