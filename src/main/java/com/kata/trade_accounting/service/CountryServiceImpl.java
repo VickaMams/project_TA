@@ -44,7 +44,7 @@ public class CountryServiceImpl implements CountryService {
     public void deleteById(Long id) {
         int i = countryRepository.setRemovedTrue(id);
         if (i == 0) {
-            throw new LawDetailsNotFoundException(String.format("Countries with id=%s not found", id));
+            throw new CountryNotFoundException(String.format("Countries with id=%s not found", id));
         }
     }
 
