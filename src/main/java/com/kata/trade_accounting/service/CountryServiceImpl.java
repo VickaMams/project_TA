@@ -51,6 +51,7 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public CountryDTO update(CountryDTO countryDTO, Long id) {
         countryDTO.setId(id);
+        save(countryDTO);
         return countryDTO;
     }
 }
