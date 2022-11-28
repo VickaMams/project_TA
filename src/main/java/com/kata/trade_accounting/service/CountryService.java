@@ -11,7 +11,7 @@ public interface CountryService {
 
     CountryDTO findById(Long id);
 
-    void save(Country country);
+    void save(CountryDTO countryDTO);
 
     void deleteById(Long id);
 

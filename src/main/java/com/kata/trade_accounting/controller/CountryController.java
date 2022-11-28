@@ -82,8 +82,8 @@ public class CountryController {
             @ApiResponse(responseCode = "404", description = "Country not created", content = @Content)
     })
     @PostMapping
-    public ResponseEntity<CountryDTO> addNewCountry(@RequestBody Country country) {
-        countryService.save(country);
+    public ResponseEntity<CountryDTO> addNewCountry(@RequestBody CountryDTO countryDTO) {
+        countryService.save(countryDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

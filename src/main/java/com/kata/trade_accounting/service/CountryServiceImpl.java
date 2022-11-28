@@ -30,18 +30,19 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public CountryDTO findById(Long id) {
-        return countryMapper.toDto(countryRepository.findById(id).orElse(null));
+        return countryMapper.toDto(countryRepository.findById(id)
+                .orElseThrow(() -> new CountryNotFoundException(String.format("Countries with id=%s not found", id))));
     }
 
     @Override
-    public void save(Country country) {
-        countryMapper.toDto(countryRepository.save(country));
+    public void save(CountryDTO countryDTO) {
+        countryRepository.save(countryMapper.toModel(countryDTO));
     }
 
     @Override
     public void deleteById(Long id) {
         Country country = countryRepository.findById(id)
-                .orElseThrow(() -> new CountryNotFoundException(String.format("Warehouse with id=%s not found", id)));
+                .orElseThrow(() -> new CountryNotFoundException(String.format("Countries with id=%s not found", id)));
         country.setRemoved(true);
         countryMapper.toDto(countryRepository.save(country));
     }
