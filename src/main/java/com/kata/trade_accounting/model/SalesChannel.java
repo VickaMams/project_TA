@@ -2,26 +2,22 @@ package com.kata.trade_accounting.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "nds")
 @Data
-public class Nds {
+public class SalesChannel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ndsValue", nullable = false)
-//    @Min(value = 0, message = "must be greater than 499")
-    private Integer ndsValue;
-
-    private String comment;
+    private String name;
+    private SalesChannelType type;
+    private String description;
 
     private boolean removed;
 }
