@@ -18,6 +18,7 @@ public class Nds {
     private Long id;
 
     @Column(name = "ndsValue", nullable = false)
+//    @Min(value = 0, message = "must be greater than 499")
     private Integer ndsValue;
 
     private String comment;
