@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 @Data
@@ -19,7 +20,8 @@ public class Group {
     private String description;
     private String code;
     private String externalCode;
-    private String NDS;
+    @Transient
+    private Nds NDS;
     private String taxationSystem;
     private String employee;
     private String department;

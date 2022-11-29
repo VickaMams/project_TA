@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class MapperGroup {
+public class GroupMapper {
 
     private final ModelMapper mapper;
 
