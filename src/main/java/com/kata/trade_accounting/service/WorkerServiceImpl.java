@@ -1,7 +1,6 @@
 package com.kata.trade_accounting.service;
 
 import com.kata.trade_accounting.dto.WorkerDto;
-import com.kata.trade_accounting.exception.LawDetailsNotFoundException;
 import com.kata.trade_accounting.exception.WorkerNotFoundException;
 import com.kata.trade_accounting.mapper.WorkerMapper;
 import com.kata.trade_accounting.model.Worker;
