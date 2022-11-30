@@ -43,4 +43,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> currencyNotFoundException(CurrencyNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(WorkerNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public String handleWorkerNotFoundException(WorkerNotFoundException workerNotFoundException) {
+        log.error(workerNotFoundException.getMessage(), workerNotFoundException);
+        return "Worker not found";
+
+    }
 }
