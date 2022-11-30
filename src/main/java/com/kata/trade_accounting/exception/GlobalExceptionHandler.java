@@ -39,20 +39,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(IdNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ResponseBody
-    public String handleNotFoundException(IdNotFoundException exception) {
-        log.error(exception.getMessage(), exception);
-        return "ID_not_found";
-    }
-
-    @ExceptionHandler(ModelDeletedException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ResponseBody
-    public String handleModelDeletedException(ModelDeletedException exception) {
-        log.error(exception.getMessage(), exception);
-        return "ModelDeleted";
+    @ExceptionHandler(value = CurrencyNotFoundException.class)
+    public ResponseEntity<String> currencyNotFoundException(CurrencyNotFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(WorkerNotFoundException.class)
