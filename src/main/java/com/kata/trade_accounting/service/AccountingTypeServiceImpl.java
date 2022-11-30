@@ -45,7 +45,7 @@ public class AccountingTypeServiceImpl implements AccountingTypeService{
         if (accountingType.isPresent()) {
             return mapper.toDto(accountingType.get());
         } else {
-            throw new IdNotFoundException(String.format("Accounting Type with id = %s not found", id));
+            throw new IdNotFoundException(String.format("Accounting Type with product id = %s not found", id));
         }
     }
 
