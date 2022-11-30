@@ -12,7 +12,7 @@ import java.util.Date;
 public interface DocumentRepository extends JpaRepository<Document, Long> {
 
     @Modifying
-    @Query("update Document set removed = true where id = ?1")
+    @Query("update Document set removed = true , dateOfDeletion = null where id = ?1")
     int setRemovedTrue(Long id);
 
     @Modifying
