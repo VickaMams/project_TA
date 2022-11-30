@@ -8,6 +8,7 @@ import java.util.List;
 public interface DocumentService {
 
     List<DocumentDTO> findAll();
+
     List<DocumentDTO> findAllInBasket();
 
     DocumentDTO getById(Long id);
@@ -15,6 +16,7 @@ public interface DocumentService {
     DocumentDTO save(DocumentDTO dto);
 
     void deleteById(Long id);
+
     void setDateOfDeletion(Long id);
 
     void resetDateOfDeletion(Long id);
