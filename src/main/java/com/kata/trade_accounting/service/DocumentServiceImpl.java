@@ -36,7 +36,7 @@ public class DocumentServiceImpl implements DocumentService {
         return repository.findAll().stream()
                 .filter(document -> document.getDateOfDeletion() != null)
                 .map(document -> {
-                    if (document.getDateOfDeletion().after(new Date())) {
+                    if (document.getDateOfDeletion().before(new Date())) {
                         document.setDateOfDeletion(null);
                         document.setRemoved(true);
                         repository.resetDateOfDeletion(null);
