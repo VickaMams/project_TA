@@ -53,6 +53,26 @@ public class DocumentController {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all Documents in Basket")
+    @Tag(name = "Operation with Document")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Got information about all Documents in Basket",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema = @Schema(implementation = DocumentDTO.class)))
+                            }),
+                    @ApiResponse(responseCode = "400", description = "Invalid request", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Document not found", content = @Content)
+            })
+    @GetMapping("/basket")
+    public ResponseEntity<List<DocumentDTO>> getAllInBasket() {
+        return new ResponseEntity<>(service.findAllInBasket(), HttpStatus.OK);
+    }
+
     @Operation(summary = "Create new Document")
     @Tag(name = "Operation with Document")
     @ApiResponses(
@@ -99,6 +119,56 @@ public class DocumentController {
             @PathVariable Long id) {
         service.deleteById(id);
         return new ResponseEntity<>("Document deleted", HttpStatus.OK);
+    }
+
+    @Operation(summary = "Put Document in Basket")
+    @Tag(name = "Operation with Document")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Document deleted",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            schema = @Schema(implementation = DocumentDTO.class))
+                            }),
+                    @ApiResponse(responseCode = "400", description = "Invalid id", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Document not found", content = @Content)
+            })
+    @PutMapping("/basket/in/{id}")
+    public ResponseEntity<String> setDateOfDeletionById(
+            @Parameter(in = ParameterIn.PATH, name = "id",
+                    required = true, description = "The identifier of Document",
+                    allowReserved = true)
+            @PathVariable Long id) {
+        service.setDateOfDeletion(id);
+        return new ResponseEntity<>("Document in basket", HttpStatus.OK);
+    }
+
+    @Operation(summary = "Return Document from Basket")
+    @Tag(name = "Operation with Document")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Return Document",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            schema = @Schema(implementation = DocumentDTO.class))
+                            }),
+                    @ApiResponse(responseCode = "400", description = "Invalid id", content = @Content),
+                    @ApiResponse(responseCode = "404", description = "Document not found", content = @Content)
+            })
+    @PutMapping("/basket/out/{id}")
+    public ResponseEntity<String> resetDateOfDeletionById(
+            @Parameter(in = ParameterIn.PATH, name = "id",
+                    required = true, description = "The identifier of Document",
+                    allowReserved = true)
+            @PathVariable Long id) {
+        service.resetDateOfDeletion(id);
+        return new ResponseEntity<>("Document removed from basket", HttpStatus.OK);
     }
 
     @Operation(summary = "Get Document by it id")
