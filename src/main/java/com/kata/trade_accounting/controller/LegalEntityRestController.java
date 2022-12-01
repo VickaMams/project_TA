@@ -25,7 +25,7 @@ public class LegalEntityRestController {
 
 
     @GetMapping()
-    @ApiOperation(value = "Получение всех юридических лиц", response = LegalEntity.class, responseContainer = "list")
+    @ApiOperation(value = "Получение всех юридических лиц", response = LegalEntityRresponseDto.class, responseContainer = "list")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешное всех юридических лиц"),
             @ApiResponse(code = 401, message = "Проблема с аутентификацией или авторизацией на сайте"),
@@ -49,7 +49,6 @@ public class LegalEntityRestController {
     public ResponseEntity<Void> createLegalEntity(@RequestBody LegalEntityRequestDto legalEntityRequestDto) {
         legalEntityService.addLegalEntity(legalEntityRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
-
     }
 
     @PutMapping("/{id}")
