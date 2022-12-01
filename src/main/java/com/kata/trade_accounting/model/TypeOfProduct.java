@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
-
 @Entity
 @Table(name = "type_of_product")
 @Data
