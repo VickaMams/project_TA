@@ -25,6 +25,7 @@ public class DocumentDTO {
     private Date planningAcceptanceDate;
     private Date sent;
     private Date printed;
+    private Date dateOfDeletion;
     private Double sum;
     private Double includingNds;
     private String agreement;
