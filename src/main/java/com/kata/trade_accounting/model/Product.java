@@ -3,12 +3,12 @@ package com.kata.trade_accounting.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 
 @Entity
@@ -38,6 +38,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "nds_id")
     private Nds NDS;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accounting_type_id")
+    private AccountingType accountingType;
 
     private boolean thisProduct;
     private boolean thisService;

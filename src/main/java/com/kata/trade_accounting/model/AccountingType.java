@@ -4,11 +4,11 @@ import lombok.Data;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,8 +28,8 @@ public class AccountingType {
     private boolean taxMark;
     private String EGAIScodes;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade= CascadeType.ALL)
-    private Product product;
+    @OneToMany(mappedBy = "accountingType", cascade = CascadeType.ALL)
+    private Set<Product> products;
 
     private boolean removed;
 }

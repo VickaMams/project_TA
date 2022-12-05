@@ -6,13 +6,6 @@ import com.kata.trade_accounting.model.UnitsOfMeasurement;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
-
 @Component
 @Data
 public class ProductDTO {
@@ -30,6 +23,7 @@ public class ProductDTO {
     private String weight;
     private String volume;
     private Nds nds;
+    private AccountingTypeDTO accountingType;
 
     private boolean thisProduct;
     private boolean thisService;

@@ -125,30 +125,6 @@ public class AccountingTypeController {
         return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
-    @Operation(summary = "Get Accounting Type by product id")
-    @Tag(name = "Operation with Accounting Type")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Information about specific Accounting Type",
-                            content = {
-                                    @Content(
-                                            mediaType = "application/json",
-                                            schema = @Schema(implementation = AccountingTypeDTO.class))
-                            }),
-                    @ApiResponse(responseCode = "400", description = "Invalid id", content = @Content),
-                    @ApiResponse(responseCode = "404", description = "Accounting Type not found", content = @Content)
-            })
-    @GetMapping("/getByProductId/{id}")
-    public ResponseEntity<AccountingTypeDTO> getByProductId(
-            @Parameter(in = ParameterIn.PATH, name = "id",
-                    required = true, description = "The identifier of Product",
-                    allowReserved = true)
-            @PathVariable Long id) {
-        return new ResponseEntity<>(service.getByProductId(id), HttpStatus.OK);
-    }
-
     @Operation(summary = "Edit specific Accounting Type")
     @Tag(name = "Operation with Accounting Type")
     @ApiResponses(

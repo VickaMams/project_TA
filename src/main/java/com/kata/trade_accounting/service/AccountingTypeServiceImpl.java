@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 
 @Service
 @AllArgsConstructor
-public class AccountingTypeServiceImpl implements AccountingTypeService{
+public class AccountingTypeServiceImpl implements AccountingTypeService {
 
     private final AccountingTypeMapper mapper;
 
@@ -36,16 +36,6 @@ public class AccountingTypeServiceImpl implements AccountingTypeService{
             return mapper.toDto(accountingType.get());
         } else {
             throw new IdNotFoundException(String.format("Accounting Type with id = %s not found", id));
-        }
-    }
-
-    @Override
-    public AccountingTypeDTO getByProductId(Long id) {
-        Optional<AccountingType> accountingType = repository.findByProductId(id);
-        if (accountingType.isPresent()) {
-            return mapper.toDto(accountingType.get());
-        } else {
-            throw new IdNotFoundException(String.format("Accounting Type with product id = %s not found", id));
         }
     }
 

@@ -10,8 +10,6 @@ public interface AccountingTypeService {
 
     AccountingTypeDTO getById(Long id);
 
-    AccountingTypeDTO getByProductId(Long id);
-
     AccountingTypeDTO save(AccountingTypeDTO dto);
 
     void deleteById(Long id);

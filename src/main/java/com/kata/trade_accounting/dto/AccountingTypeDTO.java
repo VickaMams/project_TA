@@ -20,5 +20,5 @@ public class AccountingTypeDTO {
     private Double alcoholStrength;
     private boolean taxMark;
     private String EGAIScodes;
-    private Long productId;
+
 }
