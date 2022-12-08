@@ -1,6 +1,6 @@
 package com.kata.trade_accounting.model;
 
-public enum DocumentType {
+public enum   DocumentType {
     BUYER_ORDER,
     BUYER_INVOICES,
     SHIPMENT,

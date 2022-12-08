@@ -42,7 +42,7 @@ public class LegalEntityServiceImpl implements LegalEntityService {
         if (findById(id) != null) {
             findById(id).setRemoved(true);
         } else {
-            throw new NotFoundByIdException("Юридическое лицо не найдена");
+            throw new NotFoundByIdException("Юридическое лицо не найдено");
         }
     }
 
