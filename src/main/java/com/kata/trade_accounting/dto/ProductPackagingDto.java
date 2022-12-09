@@ -16,4 +16,6 @@ public class ProductPackagingDto {
 
     @NotBlank
     private String name;
+
+    private boolean removed;
 }

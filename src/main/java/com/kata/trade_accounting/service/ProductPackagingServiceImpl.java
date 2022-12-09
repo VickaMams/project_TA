@@ -43,7 +43,7 @@ public class ProductPackagingServiceImpl implements ProductPackagingService {
     @Override
     public void removeProductPackaging(Long id) {
         if (findById(id) != null) {
-            productPackagingDao.deleteById(id);
+            findById(id).setRemoved(true);
         } else {
             throw new NotFoundByIdException("Фасовка товара запрашиваемого вида не найдена");
         }
